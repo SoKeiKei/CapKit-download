@@ -12,15 +12,13 @@
 
     <nav class="modern-nav">
         <div class="brand-logo">
-            <!-- Inline SVG Logo for consistency -->
-            <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
-                <rect width="100" height="100" rx="20" fill="#fe2c55"/>
-                <text x="50" y="55" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="65" font-weight="bold" font-family="sans-serif">C</text>
+            <svg width="20" height="28" viewBox="4 0 12 24" fill="none" stroke="#fe2c55" stroke-width="3.5" style="margin-bottom: -1px; margin-right: -2px;">
+                <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
             </svg>
-            <span>CapKit</span>
+            <span>apkit</span>
         </div>
         <div class="nav-menu">
-            <a href="#features">功能</a>
+            <a href="#features">功能介绍</a>
             <a href="#about">关于</a>
             <a href="https://github.com/SokeiKei/CapKit" target="_blank">GitHub</a>
         </div>
@@ -29,10 +27,10 @@
     <div class="hero-wrapper">
         <div class="hero-main">
             <div class="hero-content">
-                <h1>掌控你的<br><span class="highlight">剪映创作流</span></h1>
+                <h1>更简单的<br><span class="highlight">剪映模板管理</span></h1>
                 <p class="hero-desc">
-                    专为专业创作者打造。智能模板管理，极速草稿编辑。<br>
-                    Rust 内核驱动，让创作再无等待。
+                    一个极简的本地剪映模板管理工具。帮你理清杂乱的模板与文件夹。<br>
+                    单文件仅约 <strong>10MB</strong>，绿色免安装，即点即用。
                 </p>
                 <div class="action-row">
                     <a href="#" class="btn-fill">
@@ -41,9 +39,9 @@
                             <polyline points="7 10 12 15 17 10"/>
                             <line x1="12" y1="15" x2="12" y2="3"/>
                         </svg>
-                        立即下载 v0.1.0
+                        立即下载 v0.1.1
                     </a>
-                    <a href="#features" class="btn-outline">了解功能</a>
+                    <a href="#features" class="btn-outline">了解更多</a>
                 </div>
             </div>
             
@@ -58,36 +56,42 @@
             <div class="bento-grid">
                 <div class="bento-card span-2">
                     <div class="card-content">
-                        <h3>智能模板扫描</h3>
-                        <p>自动识别本地剪映模板，支持标签、时长、多维度筛选。告别杂乱的文件夹查找。</p>
+                        <h3>本地目录管理</h3>
+                        <p>通过自定义添加扫描目录，快速归类并预览你的本地模板。支持按时长、比例等多维度筛选。</p>
                     </div>
-                    <div class="card-icon-lg">🔍</div>
+                    <div class="card-icon-lg">📂</div>
                 </div>
                 <div class="bento-card">
                     <div class="card-content">
-                        <h3>Rust 极速内核</h3>
-                        <p>基于 Tauri 2.0 构建，秒级启动，极低资源占用。</p>
+                        <h3>免安装 即点即用</h3>
+                        <p>单文件 EXE 仅约 10MB。无需安装，不留后台，随用随走，专注效率。</p>
                     </div>
                 </div>
                 <div class="bento-card">
                     <div class="card-content">
-                        <h3>草稿深度编辑</h3>
-                        <p>直接修改草稿元数据，无需打开剪映即可替换文字与音频。</p>
+                        <h3>一键导入模板</h3>
+                        <p>选中模板即可一键同步至剪映草稿。实时生效，无需手动移动文件或重启剪映即可极速刷新。</p>
                     </div>
                 </div>
-                <div class="bento-card span-2">
+                <div class="bento-card">
                     <div class="card-content">
-                        <h3>现代化界面</h3>
-                        <p>沉浸式暗色模式，流畅的微交互动画，专为创意工作者设计。</p>
+                        <h3>重复模板查杀</h3>
+                        <p>分析本地模板内容，智能识别并可清理重复冗余。拒绝模板贩子滥竽充数，节省存储空间。</p>
                     </div>
-                    <div class="card-icon-lg">✨</div>
+                </div>
+                <div class="bento-card">
+                    <div class="card-content">
+                        <h3>原生感视觉</h3>
+                        <p>延续剪映品牌色系的暗色模式。流畅的细节动效，提供更好的原生操作手感。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer class="simple-footer">
-        <p>© 2026 CapKit Team. Open Source under MIT License.</p>
+        <p>CapKit © 2026 | Developed By <a href="https://sokei.top" target="_blank" style="color: var(--brand-red); text-decoration: none; font-weight: 700;">SOKEI</a></p>
+        <p style="margin-top: 0.8rem; opacity: 0.4; font-size: 0.75rem; letter-spacing: 0.1em;">极致轻量 · 纯净高效 · 一个更懂创作者的单文件剪映伴侣</p>
     </footer>
 
     <script src="js/app.js"></script>

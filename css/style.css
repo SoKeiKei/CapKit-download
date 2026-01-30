@@ -1,17 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --bg-color: #121212;
-    --surface-color: #1a1a1a;
+    --surface-color: #1e1e1e;
     --card-bg: #1e1e1e;
     --brand-red: #fe2c55;
     --brand-red-glow: rgba(254, 44, 85, 0.4);
     --text-primary: #ffffff;
     --text-secondary: #8c8c8c;
-    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.1);
     --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -20,6 +28,7 @@ body {
     font-family: var(--font-ui);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
 }
 
 /* Cinematic Noise Texture */
@@ -41,23 +50,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 1.5rem;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
     backdrop-filter: blur(12px);
-    background: rgba(18, 18, 18, 0.7);
+    background: rgba(30, 30, 30, 0.8); /* 对应 #1e1e1e (cap-gray) 的透明版本 */
     border-bottom: 1px solid var(--border-subtle);
 }
 
 .brand-logo {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-end;
+    gap: 4px;
     font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: -0.5px;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: none;
+}
+
+.brand-logo span {
+    line-height: 1;
+}
+
+.brand-logo svg {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.brand-logo:hover svg {
+    transform: rotate(-12deg);
 }
 
 .logo-icon img { width: 32px; height: 32px; border-radius: 8px; }
@@ -176,13 +199,20 @@ body {
     z-index: 10;
     transform: perspective(1200px) rotateY(-8deg) rotateX(4deg);
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden; /* 实现裁切的关键 */
 }
 
 .app-window:hover {
     transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
 }
 
-.mockup-img { width: 100%; display: block; border-radius: 12px; }
+.mockup-img { 
+    width: calc(100% + 12px); /* 略微放大以覆盖边缘 */
+    margin: -2px; /* 四周向外偏移以裁掉原图边缘 */
+    display: block; 
+    border-radius: 6px; 
+    max-width: none;
+}
 
 /* Bento Grid Features */
 .features-container {
