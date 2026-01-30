@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapKit - 专业的剪映模板管理器</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="noise-texture"></div>
+
+    <nav class="modern-nav">
+        <div class="brand-logo">
+            <!-- Inline SVG Logo for consistency -->
+            <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+                <rect width="100" height="100" rx="20" fill="#fe2c55"/>
+                <text x="50" y="55" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="65" font-weight="bold" font-family="sans-serif">C</text>
+            </svg>
+            <span>CapKit</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#features">功能</a>
+            <a href="#about">关于</a>
+            <a href="https://github.com/SokeiKei/CapKit" target="_blank">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="hero-wrapper">
+        <div class="hero-main">
+            <div class="hero-content">
+                <h1>掌控你的<br><span class="highlight">剪映创作流</span></h1>
+                <p class="hero-desc">
+                    专为专业创作者打造。智能模板管理，极速草稿编辑。<br>
+                    Rust 内核驱动，让创作再无等待。
+                </p>
+                <div class="action-row">
+                    <a href="#" class="btn-fill">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        立即下载 v0.1.0
+                    </a>
+                    <a href="#features" class="btn-outline">了解功能</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="app-window">
+                    <img src="img/img.png" alt="CapKit Interface" class="mockup-img">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-container" id="features">
+            <div class="bento-grid">
+                <div class="bento-card span-2">
+                    <div class="card-content">
+                        <h3>智能模板扫描</h3>
+                        <p>自动识别本地剪映模板，支持标签、时长、多维度筛选。告别杂乱的文件夹查找。</p>
+                    </div>
+                    <div class="card-icon-lg">🔍</div>
+                </div>
+                <div class="bento-card">
+                    <div class="card-content">
+                        <h3>Rust 极速内核</h3>
+                        <p>基于 Tauri 2.0 构建，秒级启动，极低资源占用。</p>
+                    </div>
+                </div>
+                <div class="bento-card">
+                    <div class="card-content">
+                        <h3>草稿深度编辑</h3>
+                        <p>直接修改草稿元数据，无需打开剪映即可替换文字与音频。</p>
+                    </div>
+                </div>
+                <div class="bento-card span-2">
+                    <div class="card-content">
+                        <h3>现代化界面</h3>
+                        <p>沉浸式暗色模式，流畅的微交互动画，专为创意工作者设计。</p>
+                    </div>
+                    <div class="card-icon-lg">✨</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="simple-footer">
+        <p>© 2026 CapKit Team. Open Source under MIT License.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
