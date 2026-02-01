@@ -277,6 +277,7 @@ body {
     margin-bottom: 0.75rem;
     background: linear-gradient(to right, #fff, #ccc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -305,6 +306,69 @@ body {
 
 .span-2 { grid-column: span 2; }
 .row-2 { grid-row: span 2; }
+
+.span-2 { grid-column: span 2; }
+.row-2 { grid-row: span 2; }
+
+/* Security Section - Refined Slim Style */
+.security-seal {
+    margin-top: 2.5rem;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 100px; /* Pill shape for cleaner look */
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.security-seal:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 127, 0.3);
+    transform: translateY(-1px);
+}
+
+.seal-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #00ff7f;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+}
+
+.seal-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 1.2rem;
+}
+
+.hash-pill {
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.3;
+}
+
+.report-link-slim {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    opacity: 0.6;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.report-link-slim:hover {
+    opacity: 1;
+    color: #00ff7f;
+    border-bottom-color: #00ff7f;
+}
 
 /* Footer */
 .simple-footer {
