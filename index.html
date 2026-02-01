@@ -17,6 +17,12 @@
             </svg>
             <span>apkit</span>
         </div>
+        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/Capkit.0.1.2-beta.exe" class="nav-btn-download" id="sticky-download">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
+            </svg>
+            <span>下载 V0.1.2-beta</span>
+        </a>
         <div class="nav-menu" style="display: flex; align-items: center;">
             <a href="#features">功能介绍</a>
             <a href="https://space.bilibili.com/3546772855064749" target="_blank" style="display: flex; align-items: center; gap: 6px;">
@@ -38,14 +44,14 @@
                 </p>
                 <div class="action-row">
                     <div class="download-group">
-                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/Capkit.0.1.2-beta.exe" class="btn-fill" target="_blank">
+                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/capkit.0.1.2-beta.exe" class="btn-fill" target="_blank">
                             <svg class="btn-icon-win" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
                             </svg>
                             <span>立即下载 V0.1.2 beta</span>
                             <span class="badge-recommend">单文件·推荐</span>
                         </a>
-                        <a href="https://github.com/SoKeiKei/CapKit-download/releases/latest" class="btn-glass" target="_blank">
+                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/capkit_0.1.2_x64-setup.exe" class="btn-glass" target="_blank">
                             <svg class="btn-icon-win" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
                                 <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
                             </svg>
@@ -56,8 +62,7 @@
 
                 <div class="backup-links" style="margin-top: 1.5rem; display: flex; gap: 1.5rem; font-size: 0.8rem; opacity: 0.5;">
                     <span style="color: var(--text-secondary);">备用下载：</span>
-                    <a href="#" class="backup-link" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: all 0.2s;">夸克网盘 (待填)</a>
-                    <a href="#" class="backup-link" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: all 0.2s;">百度网盘 (待填)</a>
+                    <a href="https://pan.baidu.com/s/1N4KYy_3HZn7dkP9ReNTMqA?pwd=8888" class="backup-link" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: all 0.2s;">百度网盘</a>
                 </div>
 
                 <!-- 安全校验: 极简精炼风 -->
@@ -128,5 +133,19 @@
     </footer>
 
     <script src="js/app.js"></script>
+    <script>
+        const stickyDownload = document.getElementById('sticky-download');
+        const heroSection = document.querySelector('.hero-wrapper');
+        
+        window.addEventListener('scroll', () => {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            // 滚动超过 Hero 区域 1/2 时显示，或者固定 400px
+            if (window.scrollY > 400) {
+                stickyDownload.classList.add('visible');
+            } else {
+                stickyDownload.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 </html>

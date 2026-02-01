@@ -55,9 +55,9 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    backdrop-filter: blur(12px);
-    background: rgba(30, 30, 30, 0.8); /* 对应 #1e1e1e (cap-gray) 的透明版本 */
-    border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(16px); /* 增加模糊度 */
+    background: rgba(20, 20, 20, 0.75); /* 更深的暗背景 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 更柔和的边缘 */
 }
 
 .brand-logo {
@@ -86,15 +86,50 @@ body {
 .logo-icon img { width: 32px; height: 32px; border-radius: 8px; }
 
 .nav-menu a {
-    color: var(--text-secondary);
+    color: var(--text-primary); /* 直接使用最亮文本色，提升对比度 */
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     margin-left: 2rem;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    opacity: 0.6; /* 默认略显暗淡 */
 }
 
-.nav-menu a:hover { color: var(--text-primary); }
+.nav-menu a:hover { 
+    opacity: 1; /* 悬停时全亮 */
+    color: var(--brand-red); /* 悬停颜色改为品牌色 */
+}
+
+.nav-btn-download {
+    background: var(--brand-red);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 99px; /* 圆角胶囊风格 */
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 1.2rem; /* 距离 Logo 的间距 */
+    box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* 弹性超丝滑动画 */
+    opacity: 0;
+    transform: translateX(-20px) scale(0.8); /* 从 Logo 方向滑出 */
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.05em;
+}
+
+.nav-btn-download.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+}
+
+.nav-btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--brand-red-glow);
+}
 
 /* Hero Bento Layout */
 .hero-wrapper {
@@ -102,7 +137,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 8rem 3rem 4rem;
+    padding: 8rem 3rem 10rem; /* 增加底部留白从 4rem 到 10rem */
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -281,7 +316,7 @@ body {
 
 /* Bento Grid Features */
 .features-container {
-    padding: 6rem 3rem;
+    padding: 12rem 3rem 6rem; /* 增加顶部留白从 6rem 到 12rem */
     max-width: 1400px;
     margin: 0 auto;
 }
