@@ -149,7 +149,14 @@ body {
     line-height: 1.6;
 }
 
+/* Action Row & Buttons */
 .action-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.download-group {
     display: flex;
     gap: 1rem;
 }
@@ -157,7 +164,7 @@ body {
 .btn-fill {
     background: var(--brand-red);
     color: white;
-    padding: 14px 32px;
+    padding: 14px 24px;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
@@ -166,6 +173,7 @@ body {
     gap: 8px;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 20px var(--brand-red-glow);
+    font-size: 0.95rem;
 }
 
 .btn-fill:hover {
@@ -173,17 +181,51 @@ body {
     box-shadow: 0 8px 30px var(--brand-red-glow);
 }
 
-.btn-outline {
-    border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
-    padding: 14px 32px;
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 14px 24px;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
-    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
 }
 
-.btn-outline:hover { background: rgba(255,255,255,0.05); }
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline {
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary); /* 弱化次级按钮 */
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-outline:hover { 
+    background: rgba(255,255,255,0.05); 
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* Icons within buttons */
+.btn-icon-win, .btn-icon-mac {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
 
 /* Visual Side */
 .hero-visual {
