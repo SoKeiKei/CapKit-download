@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapKit Pro - 春节限定 · 免费领取永久激活码</title>
+    <meta name="description" content="CapKit Pro 春节限定活动：关注B站或抖音，即可免费领取永久激活码，解锁全部专业版特权。">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        :root {
+            --cny-red: #e53e3e;
+            --cny-red-deep: #c53030;
+            --cny-gold: #f6ad55;
+            --cny-gold-bright: #fbd38d;
+            --cny-glow: rgba(229, 62, 62, 0.35);
+            --cny-gold-glow: rgba(246, 173, 85, 0.3);
+            --pro-dark: #0a0a0a;
+            --bg-color: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #8c8c8c;
+            --brand-red: #fe2c55;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            background-color: var(--pro-dark);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        /* ── 春节背景 ── */
+        .cny-hero {
+            background:
+                var(--pro-dark)
+                radial-gradient(ellipse 80% 50% at 20% 10%, rgba(229, 62, 62, 0.06), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 30%, rgba(246, 173, 85, 0.04), transparent);
+        }
+
+        /* ── 春节限定徽章 ── */
+        .cny-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--cny-red), var(--cny-red-deep));
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--cny-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+            text-transform: uppercase;
+        }
+
+        .cny-badge .badge-dot {
+            width: 6px; height: 6px;
+            background: var(--cny-gold-bright);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.7); }
+        }
+
+        /* ── 标题 ── */
+        .cny-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .cny-highlight {
+            background: linear-gradient(135deg, var(--cny-red), #f56565, var(--cny-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-accent {
+            color: var(--cny-gold);
+            text-shadow: 0 0 30px var(--cny-gold-glow);
+        }
+
+        .cny-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 1rem;
+            line-height: 1.7;
+        }
+
+        .cny-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--cny-gold);
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* ── 步骤引导 ── */
+        .steps-section { padding: 5rem 0 3rem; }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 3.5rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 3.5rem;
+            left: 12.5%;
+            width: 75%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(229,62,62,0.2), rgba(246,173,85,0.2), transparent);
+            z-index: 0;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(229, 62, 62, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .step-number {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cny-red), var(--cny-red-deep));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 4px 15px var(--cny-glow);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .step-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .step-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── 功能对比表 ── */
+        .comparison-section { padding: 3rem 0 2rem; }
+
+        .comparison-table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .comparison-table th {
+            background: rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table .feature-name {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .check-icon { color: #10b981; }
+        .lock-icon { color: var(--text-secondary); opacity: 0.3; }
+        .gold-check { color: var(--cny-gold); }
+
+        /* ── Pro 功能卡片 ── */
+        .pro-features-section { padding: 3rem 0 2rem; }
+
+        .pro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .pro-feature-card {
+            background: linear-gradient(160deg, rgba(30,30,30,0.5), rgba(15,15,15,0.8));
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .pro-feature-card:hover {
+            border-color: rgba(246, 173, 85, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+        }
+
+        .pro-feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pro-feature-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── CTA 区域 ── */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 0 2rem;
+        }
+
+        .cta-headline {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cta-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-cny-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--cny-red), var(--cny-red-deep));
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px var(--cny-glow);
+        }
+
+        .btn-cny-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--cny-glow);
+        }
+
+        .btn-cny-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cny-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* ── 声明 Pills ── */
+        .notices {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .notice-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 100px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .notice-pill:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(229, 62, 62, 0.15);
+        }
+
+        .notice-pill .pill-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--cny-gold);
+            opacity: 0.6;
+        }
+
+        /* ── 倒计时标语 ── */
+        .countdown-banner { text-align: center; padding: 2rem 0 0; }
+
+        .countdown-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--cny-gold);
+            opacity: 0.6;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .countdown-text::before,
+        .countdown-text::after {
+            content: '';
+            width: 40px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cny-gold), transparent);
+            opacity: 0.3;
+        }
+
+        /* ── 响应式 ── */
+        @media (max-width: 1024px) {
+            .steps-grid { grid-template-columns: repeat(2, 1fr); }
+            .steps-grid::before { display: none; }
+            .pro-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .modern-nav { padding: 1rem 1.5rem; }
+            .nav-menu { display: none; }
+            .cny-title { font-size: 2rem; }
+            .steps-grid {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+            .pro-grid { grid-template-columns: 1fr; }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-cny-primary, .btn-cny-secondary {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+            .notices {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body class="cny-hero">
+    <div class="noise-texture"></div>
+
+    <nav class="modern-nav">
+        <div class="brand-logo" onclick="location.href='index.html'" style="cursor: pointer;">
+            <svg width="20" height="28" viewBox="4 0 12 24" fill="none" stroke="#fe2c55" stroke-width="3.5" style="margin-bottom: -1px; margin-right: -2px;">
+                <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
+            </svg>
+            <span>apkit</span>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html">返回首页</a>
+            <a href="index.html#features">基础功能</a>
+            <a href="#" style="color: var(--cny-red); opacity: 1;">春节活动</a>
+        </div>
+    </nav>
+
+    <div class="hero-wrapper">
+        <!-- ═══ Hero ═══ -->
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <div class="cny-badge">
+                <span class="badge-dot"></span>
+                <span>春节限定 · 限时开放</span>
+            </div>
+            <h1 class="cny-title">
+                <span class="cny-highlight">免费领取</span> CapKit Pro<br>
+                成为原始股东
+            </h1>
+            <p class="cny-subtitle">
+                春节期间。关注开发者 B站 或 抖音，完成三连并下载最新版 CapKit，<br>
+                即可获得<strong style="color: var(--cny-gold);">永久生效</strong>的 Pro 激活码。
+            </p>
+            <div class="cny-notice">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>活动有效期：仅限 2026 春节假期期间</span>
+            </div>
+        </div>
+
+        <!-- ═══ 4 步领取流程 ═══ -->
+        <div class="steps-section">
+            <div class="section-label">How to get it</div>
+            <h2 class="section-title">四步领取 <span class="gold-accent">Pro 特权</span></h2>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>关注 B站 或 抖音</h3>
+                    <p>关注作者 <a href="https://space.bilibili.com/3546772855064749" target="_blank" style="color: var(--cny-gold); text-decoration: underline;">B站</a> 或 <a href="https://v.douyin.com/33uJV2jVFeg/" target="_blank" style="color: var(--cny-gold); text-decoration: underline;">抖音</a> 账号，成为 CapKit 的「原始股东」</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>三连 + 下载最新版</h3>
+                    <p>对相关的对应视频点赞、投币、收藏，并下载最新版本的 CapKit</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>获取机器码</h3>
+                    <p>打开 CapKit → 左下角Pro激活入口 → 复制你的专属机器码（每台设备唯一）</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>私信发送机器码</h3>
+                    <p>在 B站 或 抖音 私信我机器码，我将分批回复你的<strong>永久注册码</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ 功能对比表 ═══ -->
+        <div class="comparison-section">
+            <div class="section-label">Feature comparison</div>
+            <h2 class="section-title">基础版 vs <span class="gold-accent">专业版</span></h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-name">功能特性</th>
+                        <th>基础版</th>
+                        <th class="gold-accent">专业版 (PRO)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">本地模板管理 / 分类</td>
+                        <td><span class="check-icon">&#10003;</span></td>
+                        <td><span class="gold-check">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">一键导入剪映草稿</td>
+                        <td><span class="check-icon">&#10003;</span></td>
+                        <td><span class="gold-check">&#10003;</span></td>
+                    </tr>
+                     <tr>
+                        <td class="feature-name">视频实时预览</td>
+                        <td><span class="lock-icon">&#10005;</span></td>
+                        <td><span class="gold-check">&#10003; 丝滑筛选</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">安装模板后自动置顶</td>
+                        <td><span class="lock-icon">&#10005;</span></td>
+                        <td><span class="gold-check">&#10003; 极速定位</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">批量清理重复模板</td>
+                        <td><span class="lock-icon">&#10005;</span></td>
+                        <td><span class="gold-check">&#10003; 释放磁盘</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">自定义分类别名</td>
+                        <td><span class="lock-icon">&#10005;</span></td>
+                        <td><span class="gold-check">&#10003; 深度定制</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">永久使用 / 持续更新</td>
+                        <td><span class="check-icon">&#10003;</span></td>
+                        <td><span class="gold-check">&#10003; 优先支持</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- ═══ 底部 CTA ═══ -->
+        <div class="cta-section">
+            <div class="countdown-banner">
+                <div class="countdown-text">春节限定 · 过期不候</div>
+            </div>
+
+            <h2 class="cta-headline" style="margin-top: 2rem;">立即行动，<span class="gold-accent">免费解锁</span></h2>
+            <p class="cta-desc">
+                注册码永久生效，不限版本更新。<br>
+                但此免费通道仅在春节期间开放，先到先得。
+            </p>
+
+            <div class="cta-buttons">
+                <a href="https://space.bilibili.com/3546772855064749" target="_blank" class="btn-cny-primary">
+                    <!-- B站 SVG 图标 -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                    <span>前往 B站 关注</span>
+                </a>
+                <a href="https://v.douyin.com/33uJV2jVFeg/" target="_blank" class="btn-cny-secondary">
+                    <!-- 抖音 SVG 图标 -->
+                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.0453 20.667C10.5636 21.1171 5 25.736 5 32.8154 5 39.5448 10.3929 45 17.0453 45c6.6524 0 12.0453-5.4552 12.0453-12.1846l-0.348-15.19c3.0271 2.3352 7.8621 3.7477 12.3364 3.9734 0.8005 0.0404 1.5682-0.3232 1.7552-1.1026 0.0953-0.3971 0.1658-0.9137 0.1658-1.573s-0.0705-1.1759-0.1658-1.5729c-0.187-0.7796-0.9565-1.118-1.7542-1.1978-6.0495-0.6056-11.7467-5.5-12.5614-11.27969-0.1032-0.73153-0.513-1.40612-1.228-1.59216C26.7222 3.13273 25.9644 3 25.0755 3c-0.89 0-1.6485 0.13304-2.2171 0.28116-0.7139 0.18595-1.1394 0.85621-1.1564 1.59373l-0.6416 27.94051c0 2.2431-1.7976 4.0615-4.0151 4.0615-2.2175 0-4.0151-1.8184-4.0151-4.0615 0-2.332 1.949-3.8331 4.0151-4.2176" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span>前往抖音关注</span>
+                </a>
+            </div>
+
+            <div class="notices">
+                <div class="notice-pill">
+                    <span class="pill-dot"></span>
+                    <span>注册码永久生效</span>
+                </div>
+                <div class="notice-pill">
+                    <span class="pill-dot"></span>
+                    <span>分批发送 · 请耐心等待</span>
+                </div>
+                <div class="notice-pill">
+                    <span class="pill-dot"></span>
+                    <span>仅限春节期间领取</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="simple-footer">
+        <p>CapKit Professional &copy; 2026 | Developed By <a href="https://sokei.top" target="_blank" style="color: var(--brand-red); text-decoration: none; font-weight: 700;">SOKEI</a></p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

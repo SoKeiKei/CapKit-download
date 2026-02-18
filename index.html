@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="CapKit - 专业的剪映模板管理工具。一键同步草稿，智能清理重复模板，极大提升视频创作效率。单文件绿色免安装，即下即用。">
     <meta name="keywords" content="剪映模板管理, 剪映草稿同步, CapCut template, 视频剪辑工具, 模板清理, CapKit, 生产力工具">
-    <meta name="author" content="SoKeiKei">
+    <meta name="author" content="SoKei">
     <title>CAPKIT - 剪映模板管理 | 一键同步 | 智能清理</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -21,14 +21,15 @@
             </svg>
             <span>apkit</span>
         </div>
-        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/Capkit.0.1.2-beta.exe" class="nav-btn-download" id="sticky-download">
+        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.5/capkit.0.1.5.exe" class="nav-btn-download" id="sticky-download">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
             </svg>
-            <span>下载 V0.1.2-beta</span>
+            <span>下载 V0.1.5</span>
         </a>
         <div class="nav-menu" style="display: flex; align-items: center;">
             <a href="#features">功能介绍</a>
+            <a href="pro.html" class="nav-link-pro">Pro 版</a>
             <a href="https://space.bilibili.com/3546772855064749" target="_blank" style="display: flex; align-items: center; gap: 6px;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: -1px;">
                     <path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333-1.333z" fill="#FB7299" fill-rule="evenodd"></path>
@@ -48,25 +49,56 @@
                 </p>
                 <div class="action-row">
                     <div class="download-group">
-                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/capkit.0.1.2-beta.exe" class="btn-fill" target="_blank">
+                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.5/capkit.0.1.5.exe" class="btn-fill" id="download-win" target="_blank">
                             <svg class="btn-icon-win" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
                             </svg>
-                            <span>立即下载 V0.1.2 beta</span>
-                            <span class="badge-recommend">单文件·推荐</span>
+                            <span>Windows 下载</span>
+                            <span class="badge-recommend">推荐</span>
                         </a>
-                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.2-beta/capkit_0.1.2_x64-setup.exe" class="btn-glass" target="_blank">
-                            <svg class="btn-icon-win" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
-                                <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
-                            </svg>
-                            <span>安装包 <span class="text-weak">2MB</span></span>
-                        </a>
-                    </div>
+                        <div id="mac-group" style="display: none;">
+                            <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.5/capkit_0.1.5_aarch64.dmg" class="btn-mac-fill" id="download-mac" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.057 14.214a3.179 3.179 0 0 1 1.543-2.673 3.336 3.336 0 0 0-2.617-1.411c-1.114-.112-2.17.658-2.736.658-.565 0-1.428-.646-2.35-.63a3.504 3.504 0 0 0-2.946 1.777c-1.266 2.193-.323 5.42 0 6.33a2.91 2.91 0 0 0 1.41 1.862c.548.258 1.082.784 1.84.784.758 0 .991-.476 1.906-.476.915 0 1.132.476 1.921.476.789 0 1.258-.476 1.806-.784a5.833 5.833 0 0 0 .741-.444 3.037 3.037 0 0 1-1.843-2.712zM14.545 8.783a3.189 3.189 0 0 0 .736-2.28 3.236 3.236 0 0 0-2.115 1.09 3.054 3.054 0 0 0-.756 2.222 2.657 2.657 0 0 0 2.135-1.032z"/>
+                                </svg>
+                                <span>macOS 下载</span>
+                            </a>
+                        </div> <!-- 闭合 mac-group -->
+                    </div> <!-- 闭合 download-group -->
+                    <a href="pro.html" class="btn-pro-gold">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                        </svg>
+                        <span>获取 Pro <span class="text-weak">免费领取</span></span>
+                    </a>
+                </div> <!-- 闭合 action-row -->
+                
+                <!-- Mac 故障支持区 (处于 action-row 下方) -->
+                <div id="mac-support-area" style="display: none; margin-top: 1.5rem;">
+                    <details class="mac-troubleshoot">
+                        <summary>提示“App 已损坏/无法打开”？</summary>
+                        <div class="troubleshoot-wrapper">
+                            <div class="troubleshoot-content">
+                                <p>这是系统安全限制。请点击下方按钮复制代码，并在终端执行：</p>
+                                <div class="code-block-wrapper">
+                                    <code id="mac-fix-code">sudo xattr -rd com.apple.quarantine /Applications/CapKit.app</code>
+                                    <button class="btn-copy-mini" onclick="copyMacCode()">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                        <span>复制</span>
+                                    </button>
+                                </div>
+                                <p style="font-size: 0.7rem; margin-top: 8px;">* 输入密码时屏幕不显示，回车后重启 App 即可。</p>
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="backup-links" style="margin-top: 1.5rem; display: flex; gap: 1.5rem; font-size: 0.8rem; opacity: 0.5;">
                     <span style="color: var(--text-secondary);">备用下载：</span>
-                    <a href="https://pan.baidu.com/s/1N4KYy_3HZn7dkP9ReNTMqA?pwd=8888" class="backup-link" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: all 0.2s;">百度网盘</a>
+                    <a href="https://pan.baidu.com/s/1K9VAkGsY2Gq-MhHSrdWjCg?pwd=8888" class="backup-link" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: all 0.2s;">百度网盘</a>
                 </div>
 
                 <!-- 安全校验: 极简精炼风 -->
@@ -77,12 +109,12 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
-                            <span>安全合规 · 72项引擎检测通过</span>
+                            <span id="security-text">70+ 主流引擎严格检测</span>
                         </div>
-                        <a href="https://www.virustotal.com/gui/file/28ce4e7ecdebfe279e7091faf0b433d97daf171bc91856e23b0de773c61b3367/detection" target="_blank" class="report-link-slim">查看报告 →</a>
+                        <a href="https://www.virustotal.com/gui/file/dfe949a0a60b20dfee4faff3fec020946726808a6b1aa324a89236f3feb31bfb?nocache=1" target="_blank" class="report-link-slim" id="security-link">查看报告 →</a>
                     </div>
-                    <div class="hash-pill" style="font-size: 0.65rem; opacity: 0.3; font-family: 'JetBrains Mono', monospace; word-break: break-all;">
-                        SHA256: 28ce4e7ecdebfe279e7091faf0b433d97daf171bc91856e23b0de773c61b3367
+                    <div class="hash-pill" id="security-hash" style="font-size: 0.65rem; opacity: 0.3; font-family: 'JetBrains Mono', monospace; word-break: break-all;">
+                        SHA256: dfe949a0a60b20dfee4faff3fec020946726808a6b1aa324a89236f3feb31bfb
                     </div>
                 </div>
             </div>
@@ -91,28 +123,39 @@
                 <div class="app-window">
                     <img src="img/img.png" alt="CapKit Interface" class="mockup-img">
                 </div>
-            </div>
-        </div>
+            </div> <!-- 闭合 hero-visual -->
+        </div> <!-- 闭合 hero-main -->
+    </div> <!-- 闭合 hero-wrapper -->
 
-        <div class="features-container" id="features">
+    <div class="features-container" id="features">
             <div class="bento-grid">
                 <div class="bento-card span-2">
                     <div class="card-content">
-                        <h3>一键导入模板</h3>
-                        <p>选中模板即可一键同步至剪映草稿。实时生效，无需手动移动文件或重启剪映即可极速刷新。</p>
+                        <h3>一键导入并置顶</h3>
+                        <p>选中模板一键同步至剪映草稿。Pro 版支持<strong>安装后自动置顶</strong>，无需翻找即刻开始创作，极大提升效率。</p>
                     </div>
+                    <div class="card-icon-lg">✨</div>
                 </div>
                 <div class="bento-card">
                     <div class="card-content">
-                        <h3>重复模板查杀</h3>
-                        <p>分析本地模板内容，智能识别并可清理重复冗余。拒绝模板贩子滥竽充数，节省存储空间。</p>
+                        <h3>视频实时预览</h3>
+                        <p>支持扫描多级目录，通过鼠标悬停即可触发<strong>极速视频预览</strong>。像刷短视频一样在本地挑选心仪模板。</p>
                     </div>
+                    <div class="card-icon-lg">🎬</div>
                 </div>
                 <div class="bento-card">
                     <div class="card-content">
                         <h3>免安装 即点即用</h3>
-                        <p>单文件 EXE 仅约 10MB。无需安装，不留后台，随用随走，专注效率。</p>
+                        <p>单文件 EXE 仅约 11MB。无需安装，不留后台，随用随走，专注效率。</p>
                     </div>
+                    <div class="card-icon-lg">⚡</div>
+                </div>
+                <div class="bento-card">
+                    <div class="card-content">
+                        <h3>重复模板查杀</h3>
+                        <p>精准扫描已配置的模板目录，识别并批量删除重复冗余，瞬间释放宝贵的磁盘空间。</p>
+                    </div>
+                    <div class="card-icon-lg">🧹</div>
                 </div>
                 <div class="bento-card">
                     <div class="card-content">
@@ -121,14 +164,52 @@
                     </div>
                     <div class="card-icon-lg">📂</div>
                 </div>
-                <div class="bento-card">
-                    <div class="card-content">
-                        <h3>原生感视觉</h3>
-                        <p>延续剪映品牌色系的暗色模式。流畅的细节动效，提供更好的原生操作手感。</p>
-                    </div>
+            </div>
+        <section class="faq-section" id="faq">
+            <div class="faq-container">
+                <h2 class="faq-title">常见问题 / FAQ</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>CapKit Pro 激活后能否永久使用？</summary>
+                        <div class="faq-answer">
+                            <p>是的。激活码均为<strong>永久授权</strong>，永不回收，也永不失效。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>使用 CapKit 推荐做什么配置？</summary>
+                        <div class="faq-answer">
+                            <p><strong>1. 目录隔离：</strong>强烈建议在剪映设置中将“草稿目录”自定义到系统盘（C盘）以外的磁盘，可有效规避系统权限限制或重装系统导致的数据丢失。</p>
+                            <p><strong>2. 统一仓库：</strong>建立专门的“模板仓库”目录，CapKit 拥有极强的多级扫描能力，即便下载文件夹结构混乱，也能精准提取模板数据。</p>
+                            <p><strong>3. 同步预览：</strong>预览视频与模板仓库配置在同一目录下，CapKit 即可自动关联，能极大地提升模板挑选效率。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>CapKit 占用系统资源和网络吗？</summary>
+                        <div class="faq-answer">
+                            <p>得益于原生架构开发，CapKit EXE 体积仅约 11MB。运行时内存占用通常在 50MB 以内，除了检查版本更新外，不会产生任何多余的网络请求，纯净且高效。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>它会影响剪映原本的数据安全吗？</summary>
+                        <div class="faq-answer">
+                            <p>完全不会。CapKit 采用非侵入式逻辑，通过标准接口读取和同步草稿，不篡改剪映核心文件，不上传任何隐私数据，属于剪映的“轻量化伴侣”。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>目前支持 Mac 系统吗？</summary>
+                        <div class="faq-answer">
+                            <p>是的！CapKit 现已实现 **Windows & macOS 双端支持**。两个版本均享有同等的 Pro 特权及一键同步体验。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>如果更换了电脑，Pro 激活码还能用吗？</summary>
+                        <div class="faq-answer">
+                            <p>Pro 授权采用“一机一码”绑定机制。暂不支持更换设备。</p>
+                        </div>
+                    </details>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <footer class="simple-footer">
@@ -141,9 +222,97 @@
         const stickyDownload = document.getElementById('sticky-download');
         const heroSection = document.querySelector('.hero-wrapper');
         
+        // 自动识别系统展示对应下载按钮
+        const urlParams = new URLSearchParams(window.location.search);
+        const forcedOS = urlParams.get('os'); // 支持 ?os=mac 进行预览
+        
+        const isMac = forcedOS === 'mac' || (/Mac|iPhone|iPod|iPad/i.test(navigator.platform) && forcedOS !== 'win');
+        const winBtn = document.getElementById('download-win');
+        const macGroup = document.getElementById('mac-group');
+        const macSupport = document.getElementById('mac-support-area');
+
+        if (isMac) {
+            macGroup.style.display = 'flex';
+            macSupport.style.display = 'block';
+            winBtn.style.display = 'none';
+            
+            // 更新安全报告为 Mac 链接及其文案
+            document.getElementById('security-text').innerText = '60+ 主流引擎严格检测';
+            document.getElementById('security-link').href = 'https://www.virustotal.com/gui/file/4aeff19f2c297b3aecece126e28b7b052b416891d2647974bea0efbb15ee6995?nocache=1';
+            document.getElementById('security-hash').innerText = 'SHA256: 4aeff19f2c297b3aecece126e28b7b052b416891d2647974bea0efbb15ee6995';
+
+            // 同步顶部导航条按钮为 Mac 样式
+            stickyDownload.href = "https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.5/capkit_0.1.5_aarch64.dmg"; 
+            stickyDownload.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.057 14.214a3.179 3.179 0 0 1 1.543-2.673 3.336 3.336 0 0 0-2.617-1.411c-1.114-.112-2.17.658-2.736.658-.565 0-1.428-.646-2.35-.63a3.504 3.504 0 0 0-2.946 1.777c-1.266 2.193-.323 5.42 0 6.33a2.91 2.91 0 0 0 1.41 1.862c.548.258 1.082.784 1.84.784.758 0 .991-.476 1.906-.476.915 0 1.132.476 1.921.476.789 0 1.258-.476 1.806-.784a5.833 5.833 0 0 0 .741-.444 3.037 3.037 0 0 1-1.843-2.712zM14.545 8.783a3.189 3.189 0 0 0 .736-2.28 3.236 3.236 0 0 0-2.115 1.09 3.054 3.054 0 0 0-.756 2.222 2.657 2.657 0 0 0 2.135-1.032z"/>
+                </svg>
+                <span>Mac 下载 V0.1.5</span>
+            `;
+        } else {
+            winBtn.style.display = 'inline-flex';
+            macGroup.style.display = 'none';
+            macSupport.style.display = 'none';
+        }
+
+        // 复制代码逻辑
+        function copyMacCode() {
+            const codeText = document.getElementById('mac-fix-code').innerText;
+            const btn = document.querySelector('.btn-copy-mini');
+            
+            const handleSuccess = () => {
+                const originalContent = btn.innerHTML;
+                btn.classList.add('success');
+                btn.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>已复制</span>
+                `;
+                
+                setTimeout(() => {
+                    btn.classList.remove('success');
+                    btn.innerHTML = originalContent;
+                }, 2000);
+            };
+
+            // 优先使用 Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(handleSuccess).catch(err => {
+                    console.error('API 复制失败:', err);
+                    fallbackCopy(codeText);
+                });
+            } else {
+                fallbackCopy(codeText);
+            }
+
+            // 非安全上下文 (如局域网 IP) 的回退方案
+            function fallbackCopy(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-9999px";
+                textArea.style.top = "0";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        handleSuccess();
+                    } else {
+                        throw new Error('execCommand 失败');
+                    }
+                } catch (err) {
+                    console.error('回退复制失败:', err);
+                    alert('复制失败，请尝试手动长按代码块进行复制');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
         window.addEventListener('scroll', () => {
             const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            // 滚动超过 Hero 区域 1/2 时显示，或者固定 400px
             if (window.scrollY > 400) {
                 stickyDownload.classList.add('visible');
             } else {
