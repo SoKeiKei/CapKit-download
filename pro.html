@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CapKit Pro - 春节限定 · 免费领取永久激活码</title>
-    <meta name="description" content="CapKit Pro 春节限定活动：关注B站或抖音，即可免费领取永久激活码，解锁全部专业版特权。">
+    <title>CapKit Pro - 高效剪辑 · 专业版特性全解锁</title>
+    <link rel="canonical" href="https://c.sokei.top/pro.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://c.sokei.top/pro.html">
+    <meta property="og:title" content="CapKit Pro - 高效剪辑 · 专业版特性全解锁">
+    <meta property="og:description" content="解锁 CapKit Pro 专业版，体验视频实时预览、批量清理重复模板及深度管理功能。首月特惠仅需 9.9 元。">
+    <meta property="og:image" content="https://c.sokei.top/img/img.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://c.sokei.top/pro.html">
+    <meta property="twitter:title" content="CapKit Pro - 高效剪辑 · 专业版特性全解锁">
+    <meta property="twitter:description" content="解锁 CapKit Pro 专业版，享受视频实时预览与进阶管理特权。">
+    <meta property="twitter:image" content="https://c.sokei.top/img/img.png">
+
+    <!-- Structured Data with Price -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CapKit Pro",
+      "operatingSystem": "Windows, macOS",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "9.9",
+        "priceCurrency": "CNY",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "ratingCount": "42"
+      }
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -45,7 +82,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, var(--cny-red), var(--cny-red-deep));
+            background: linear-gradient(135deg, #2d3748, #1a202c);
             color: #fff;
             padding: 6px 18px;
             border-radius: 100px;
@@ -53,15 +90,15 @@
             font-size: 0.78rem;
             letter-spacing: 0.08em;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 20px var(--cny-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
             text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .cny-badge .badge-dot {
             width: 6px; height: 6px;
-            background: var(--cny-gold-bright);
+            background: var(--cny-gold);
             border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
         }
 
         @keyframes pulse-dot {
@@ -395,6 +432,104 @@
             opacity: 0.3;
         }
 
+        /* ── 动态倒计时计时器 ── */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .timer-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--cny-gold);
+            text-shadow: 0 0 15px var(--cny-gold-glow);
+            line-height: 1;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .timer-sep {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            color: var(--cny-red);
+            padding-top: 0.2rem;
+            opacity: 0.5;
+        }
+
+        /* ── 价格展示 ── */
+        .price-container {
+            text-align: center;
+            margin: 3rem 0 0.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(246,173,85,0.05), transparent);
+            border-radius: 20px;
+            border: 1px solid rgba(246,173,85,0.1);
+        }
+
+        .price-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .price-current {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--cny-gold);
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px var(--cny-gold-glow);
+        }
+
+        .price-current::before {
+            content: '¥';
+            font-size: 1.5rem;
+            margin-right: 4px;
+        }
+
+        .price-original {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            opacity: 0.5;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .price-badge {
+            display: inline-block;
+            background: var(--cny-red);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
         /* ── 响应式 ── */
         @media (max-width: 1024px) {
             .steps-grid { grid-template-columns: repeat(2, 1fr); }
@@ -441,7 +576,7 @@
         <div class="nav-menu">
             <a href="index.html">返回首页</a>
             <a href="index.html#features">基础功能</a>
-            <a href="#" style="color: var(--cny-red); opacity: 1;">春节活动</a>
+            <a href="#" style="color: var(--cny-gold); opacity: 1; font-weight: 700;">Pro 专业版</a>
         </div>
     </nav>
 
@@ -450,47 +585,43 @@
         <div style="text-align: center; max-width: 800px; margin: 0 auto;">
             <div class="cny-badge">
                 <span class="badge-dot"></span>
-                <span>春节限定 · 限时开放</span>
+                <span>Pro Exclusive · 专业版特权</span>
             </div>
+
             <h1 class="cny-title">
-                <span class="cny-highlight">免费领取</span> CapKit Pro<br>
-                成为原始股东
+                解锁 <span class="cny-highlight">CapKit Pro</span><br>
+                让灵感井然有序
             </h1>
             <p class="cny-subtitle">
-                春节期间。关注开发者 B站 或 抖音，完成三连并下载最新版 CapKit，<br>
-                即可获得<strong style="color: var(--cny-gold);">永久生效</strong>的 Pro 激活码。
+                开启高效的整理流。激活 CapKit Pro，解锁视频实时预览、<br>
+                批量清理及进阶管理功能，让您的本地素材库从此告别杂乱。
             </p>
             <div class="cny-notice">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span>活动有效期：仅限 2026 春节假期期间</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>永久授权 · 终身更新 · 极速响应</span>
             </div>
         </div>
 
-        <!-- ═══ 4 步领取流程 ═══ -->
+        <!-- ═══ 激活流程 ═══ -->
         <div class="steps-section">
-            <div class="section-label">How to get it</div>
-            <h2 class="section-title">四步领取 <span class="gold-accent">Pro 特权</span></h2>
+            <div class="section-label">Activation guide</div>
+            <h2 class="section-title">简单三步 开启 <span class="gold-accent">Pro 体验</span></h2>
 
-            <div class="steps-grid">
+            <div class="steps-grid" style="grid-template-columns: repeat(3, 1fr);">
                 <div class="step-card">
                     <div class="step-number">01</div>
-                    <h3>关注 B站 或 抖音</h3>
-                    <p>关注作者 <a href="https://space.bilibili.com/3546772855064749" target="_blank" style="color: var(--cny-gold); text-decoration: underline;">B站</a> 或 <a href="https://v.douyin.com/33uJV2jVFeg/" target="_blank" style="color: var(--cny-gold); text-decoration: underline;">抖音</a> 账号，成为 CapKit 的「原始股东」</p>
+                    <h3>获取机器码</h3>
+                    <p>启动 CapKit 客户端，点击左下角「Pro 激活」入口，一键复制您的专属设备机器码。</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">02</div>
-                    <h3>三连 + 下载最新版</h3>
-                    <p>对相关的对应视频点赞、投币、收藏，并下载最新版本的 CapKit</p>
+                    <h3>联系作者授权</h3>
+                    <p>联系作者获取激活码。通过官方渠道提交机器码申请，获取您的永久授权密匙。</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">03</div>
-                    <h3>获取机器码</h3>
-                    <p>打开 CapKit → 左下角Pro激活入口 → 复制你的专属机器码（每台设备唯一）</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">04</div>
-                    <h3>私信发送机器码</h3>
-                    <p>在 B站 或 抖音 私信我机器码，我将分批回复你的<strong>永久注册码</strong></p>
+                    <h3>一键激活解锁</h3>
+                    <p>将获得的激活码粘贴至软件内的激活框，点击「立即激活」，即可解锁全部专业版功能。</p>
                 </div>
             </div>
         </div>
@@ -537,7 +668,12 @@
                     <tr>
                         <td class="feature-name">自定义分类别名</td>
                         <td><span class="lock-icon">&#10005;</span></td>
-                        <td><span class="gold-check">&#10003; 深度定制</span></td>
+                        <td><span class="gold-check">&#10003; 品牌个性</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">模板分类自定义</td>
+                        <td><span class="lock-icon">&#10005;</span></td>
+                        <td><span class="gold-check">&#10003; 灵感归纳</span></td>
                     </tr>
                     <tr>
                         <td class="feature-name">永久使用 / 持续更新</td>
@@ -551,14 +687,19 @@
 
         <!-- ═══ 底部 CTA ═══ -->
         <div class="cta-section">
-            <div class="countdown-banner">
-                <div class="countdown-text">春节限定 · 过期不候</div>
+            <div class="price-container">
+                <div class="price-label">限定特惠计划</div>
+                <div class="price-main">
+                    <span class="price-current">9.9</span>
+                    <span class="price-original">¥29.9</span>
+                </div>
+                <div class="price-badge">上线首月特惠 · 永久授权</div>
             </div>
 
-            <h2 class="cta-headline" style="margin-top: 2rem;">立即行动，<span class="gold-accent">免费解锁</span></h2>
+            <h2 class="cta-headline">开启您的高效剪辑生活</h2>
             <p class="cta-desc">
-                注册码永久生效，不限版本更新。<br>
-                但此免费通道仅在春节期间开放，先到先得。
+                永久授权令牌，享终身功能更新。<br>
+                立即获取 Pro 授权密匙，解锁 CapKit 全部高级功能。
             </p>
 
             <div class="cta-buttons">
@@ -581,15 +722,15 @@
             <div class="notices">
                 <div class="notice-pill">
                     <span class="pill-dot"></span>
-                    <span>注册码永久生效</span>
+                    <span>授权永久生效</span>
                 </div>
                 <div class="notice-pill">
                     <span class="pill-dot"></span>
-                    <span>分批发送 · 请耐心等待</span>
+                    <span>极速人工授权</span>
                 </div>
                 <div class="notice-pill">
                     <span class="pill-dot"></span>
-                    <span>仅限春节期间领取</span>
+                    <span>终身免费更新</span>
                 </div>
             </div>
         </div>
