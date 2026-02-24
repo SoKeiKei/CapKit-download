@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://c.sokei.top/pro.html">
     <meta property="og:title" content="CapKit Pro - 高效剪辑 · 专业版特性全解锁">
-    <meta property="og:description" content="解锁 CapKit Pro 专业版，体验视频实时预览、批量清理重复模板及深度管理功能。激活码获取方式待定。">
+    <meta property="og:description" content="解锁 CapKit Pro 专业版，体验视频实时预览、批量清理重复模板及深度管理功能。支持爱发电自助赞助与激活。">
     <meta property="og:image" content="https://c.sokei.top/img/img.png">
 
     <!-- Twitter -->
@@ -30,7 +30,7 @@
       "applicationCategory": "MultimediaApplication",
       "offers": {
         "@type": "Offer",
-        "price": "0",
+        "price": "19.9",
         "priceCurrency": "CNY",
         "availability": "https://schema.org/InStock"
       },
@@ -45,6 +45,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --cny-red: #e53e3e;
@@ -101,11 +102,6 @@
             border-radius: 50%;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.7); }
-        }
-
         /* ── 标题 ── */
         .cny-title {
             font-family: 'Noto Serif SC', serif;
@@ -147,7 +143,7 @@
         }
 
         /* ── 步骤引导 ── */
-        .steps-section { display: none; padding: 5rem 0 3rem; }
+        .steps-section { padding: 5rem 0 3rem; }
 
         .section-label {
             text-align: center;
@@ -169,7 +165,7 @@
 
         .steps-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.2rem;
             position: relative;
         }
@@ -265,43 +261,289 @@
         .lock-icon { color: var(--text-secondary); opacity: 0.3; }
         .gold-check { color: var(--cny-gold); }
 
-        /* ── Pro 功能卡片 ── */
-        .pro-features-section { padding: 3rem 0 2rem; }
-
-        .pro-grid {
+        /* ── 激活区域组合布局 ── */
+        .activation-wrapper {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding: 5rem 0;
         }
 
-        .pro-feature-card {
-            background: linear-gradient(160deg, rgba(30,30,30,0.5), rgba(15,15,15,0.8));
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        .steps-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .pro-feature-card:hover {
-            border-color: rgba(246, 173, 85, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+        .steps-vertical .step-card {
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
         }
 
-        .pro-feature-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(to right, #fff, #ccc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .steps-vertical .step-number {
+            margin: 0;
+            flex-shrink: 0;
         }
 
-        .pro-feature-card p {
-            font-size: 0.88rem;
+        .activation-container-side {
+            position: sticky;
+            top: 120px;
+        }
+
+        /* ── 响应式 ── */
+        @media (max-width: 1024px) {
+            .activation-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .activation-container-side {
+                position: static;
+            }
+        }
+
+        .activation-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cny-red);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-activate {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--cny-red), var(--cny-red-deep));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--cny-glow);
+        }
+
+        .btn-activate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--cny-glow);
+        }
+
+        .btn-activate:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-area {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 12px;
+            display: none;
+        }
+
+        .result-area.error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+
+        .license-key-display {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: #2ecc71;
+            position: relative;
+            text-align: left;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── 激活成功弹窗 ── */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .success-modal {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid var(--cny-gold);
+            border-radius: 32px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 50px rgba(246, 173, 85, 0.2);
+        }
+
+        .modal-overlay.active .success-modal {
+            transform: scale(1);
+        }
+
+        .success-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--cny-gold), #fbd38d);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            font-size: 40px;
+            box-shadow: 0 10px 20px rgba(246, 173, 85, 0.3);
+        }
+
+        .modal-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2rem;
+            color: var(--cny-gold);
+            margin-bottom: 1rem;
+        }
+
+        .modal-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
             line-height: 1.6;
+        }
+
+        .modal-license-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(246, 173, 85, 0.4);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .modal-license-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            word-break: break-all;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .btn-modal-copy {
+            background: var(--cny-gold);
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+
+        .btn-modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .btn-modal-close:hover {
+            opacity: 1;
         }
 
         /* ── CTA 区域 ── */
@@ -409,132 +651,10 @@
             opacity: 0.6;
         }
 
-        /* ── 倒计时标语 ── */
-        .countdown-banner { text-align: center; padding: 2rem 0 0; }
-
-        .countdown-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-            color: var(--cny-gold);
-            opacity: 0.6;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .countdown-text::before,
-        .countdown-text::after {
-            content: '';
-            width: 40px; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cny-gold), transparent);
-            opacity: 0.3;
-        }
-
-        /* ── 动态倒计时计时器 ── */
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .timer-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 70px;
-        }
-
-        .timer-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--cny-gold);
-            text-shadow: 0 0 15px var(--cny-gold-glow);
-            line-height: 1;
-        }
-
-        .timer-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .timer-sep {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            color: var(--cny-red);
-            padding-top: 0.2rem;
-            opacity: 0.5;
-        }
-
-        .price-container {
-            display: none; /* 暂时隐藏收费 */
-            text-align: center;
-            margin: 3rem 0 0.5rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(246,173,85,0.05), transparent);
-            border-radius: 20px;
-            border: 1px solid rgba(246,173,85,0.1);
-        }
-
-        .price-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
-        }
-
-        .price-main {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .price-current {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--cny-gold);
-            font-family: 'JetBrains Mono', monospace;
-            text-shadow: 0 0 20px var(--cny-gold-glow);
-        }
-
-        .price-current::before {
-            content: '¥';
-            font-size: 1.5rem;
-            margin-right: 4px;
-        }
-
-        .price-original {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            text-decoration: line-through;
-            opacity: 0.5;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .price-badge {
-            display: inline-block;
-            background: var(--cny-red);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: 1rem;
-        }
-
         /* ── 响应式 ── */
         @media (max-width: 1024px) {
             .steps-grid { grid-template-columns: repeat(2, 1fr); }
             .steps-grid::before { display: none; }
-            .pro-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -546,7 +666,6 @@
                 max-width: 360px;
                 margin: 0 auto;
             }
-            .pro-grid { grid-template-columns: 1fr; }
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -559,6 +678,9 @@
             .notices {
                 flex-direction: column;
                 align-items: center;
+            }
+            .activation-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -600,32 +722,71 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
                 <span>永久授权 · 终身更新 · 极速响应</span>
             </div>
-            
-            <div style="margin-top: 2rem; padding: 10px 20px; background: rgba(246,173,85,0.1); border: 1px dashed var(--cny-gold); border-radius: 8px; display: inline-block; color: var(--cny-gold); font-weight: 600; font-size: 0.9rem;">
-                获取 Pro 激活码方式：待定
-            </div>
         </div>
 
-        <!-- ═══ 激活流程 ═══ -->
-        <div class="steps-section">
-            <div class="section-label">Activation guide</div>
-            <h2 class="section-title">简单三步 开启 <span class="gold-accent">Pro 体验</span></h2>
+        <!-- ═══ 激活区域组合 ═══ -->
+        <div class="activation-wrapper" id="activate">
+            <!-- 左侧：步骤 -->
+            <div class="steps-section-side">
+                <div class="section-label" style="text-align: left;">Activation guide</div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2.5rem;">简单三步 开启 <span class="gold-accent">Pro 体验</span></h2>
+                
+                <div class="steps-vertical">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div>
+                            <h3>获取机器码</h3>
+                            <p>启动 CapKit 客户端，点击左下角「Pro 激活」入口，一键复制您的专属设备机器码。</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div>
+                            <h3>请作者喝咖啡</h3>
+                            <p><a href="https://afdian.com/a/capkit" target="_blank" style="color: var(--cny-gold); text-decoration: underline;">前往爱发电请作者喝杯咖啡</a>，完成后您将立即获得一个「兑换码」（即订单号）。</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div>
+                            <h3>自助激活</h3>
+                            <p>在右侧表单输入兑换码与机器码，点击合成即可获得永久授权激活码。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="steps-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="step-card">
-                    <div class="step-number">01</div>
-                    <h3>获取机器码</h3>
-                    <p>启动 CapKit 客户端，点击左下角「Pro 激活」入口，一键复制您的专属设备机器码。</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">02</div>
-                    <h3>联系作者授权</h3>
-                    <p>联系作者获取激活码。通过官方渠道提交机器码申请，获取您的永久授权密匙。</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">03</div>
-                    <h3>一键激活解锁</h3>
-                    <p>将获得的激活码粘贴至软件内的激活框，点击「立即激活」，即可解锁全部专业版功能。</p>
+            <!-- 右侧：激活窗口 -->
+            <div class="activation-container-side">
+                <div class="section-label">Self-service activation</div>
+                <h2 class="section-title" style="margin-bottom: 2.5rem;">自助激活中心</h2>
+                
+                <div class="activation-card">
+                    <form id="activateForm">
+                        <div class="form-group">
+                            <label class="form-label">兑换码 (请作者喝咖啡后获得)</label>
+                            <input type="text" id="redeemCode" class="form-input" placeholder="例如: CAP-ABCD-1234-EFGH" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">机器码 (在 CapKit 软件中复制)</label>
+                            <input type="text" id="machineId" class="form-input" placeholder="例如: 9C2N-8B2A-XXXX-XXXX" required>
+                        </div>
+
+                        <button type="submit" class="btn-activate" id="submitBtn">
+                            <div class="loading-spinner" id="spinner"></div>
+                            <span id="btnText">合成激活码</span>
+                        </button>
+                    </form>
+
+                    <div id="resultArea" class="result-area">
+                        <h3 id="resultTitle" style="margin-bottom: 0.5rem; color: #2ecc71;">合成激活码成功！</h3>
+                        <p id="resultMsg" style="font-size: 0.85rem; color: var(--text-secondary);">请复制下方的激活码，填入软件即可解锁 Pro 功能。</p>
+                        <div id="licenseBox" class="license-key-display" style="display: none;">
+                            <code id="licenseKey"></code>
+                            <button class="copy-btn" onclick="copyLicense()">复制</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -683,9 +844,7 @@
             </table>
         </div>
 
-
         <div class="cta-section">
-
             <h2 class="cta-headline">开启您的高效剪辑生活</h2>
             <p class="cta-desc">
                 永久授权令牌，享终身功能更新。<br>
@@ -693,19 +852,17 @@
             </p>
 
             <div class="cta-buttons">
-                <a href="https://space.bilibili.com/3546772855064749" target="_blank" class="btn-cny-primary">
-                    <!-- B站 SVG 图标 -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333z" fill="currentColor" fill-rule="evenodd"></path>
+                <a href="https://afdian.com/a/capkit" target="_blank" class="btn-cny-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
-                    <span>前往 B站 关注</span>
+                    <span>请作者喝杯咖啡</span>
                 </a>
-                <a href="https://v.douyin.com/33uJV2jVFeg/" target="_blank" class="btn-cny-secondary">
-                    <!-- 抖音 SVG 图标 -->
-                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.0453 20.667C10.5636 21.1171 5 25.736 5 32.8154 5 39.5448 10.3929 45 17.0453 45c6.6524 0 12.0453-5.4552 12.0453-12.1846l-0.348-15.19c3.0271 2.3352 7.8621 3.7477 12.3364 3.9734 0.8005 0.0404 1.5682-0.3232 1.7552-1.1026 0.0953-0.3971 0.1658-0.9137 0.1658-1.573s-0.0705-1.1759-0.1658-1.5729c-0.187-0.7796-0.9565-1.118-1.7542-1.1978-6.0495-0.6056-11.7467-5.5-12.5614-11.27969-0.1032-0.73153-0.513-1.40612-1.228-1.59216C26.7222 3.13273 25.9644 3 25.0755 3c-0.89 0-1.6485 0.13304-2.2171 0.28116-0.7139 0.18595-1.1394 0.85621-1.1564 1.59373l-0.6416 27.94051c0 2.2431-1.7976 4.0615-4.0151 4.0615-2.2175 0-4.0151-1.8184-4.0151-4.0615 0-2.332 1.949-3.8331 4.0151-4.2176" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <a href="https://space.bilibili.com/3546772855064749" target="_blank" class="btn-cny-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333z" fill-rule="evenodd"></path>
                     </svg>
-                    <span>前往抖音关注</span>
+                    <span>关注 B站 动态</span>
                 </a>
             </div>
 
@@ -716,7 +873,7 @@
                 </div>
                 <div class="notice-pill">
                     <span class="pill-dot"></span>
-                    <span>获取通道即将开启</span>
+                    <span>自助激活秒发货</span>
                 </div>
                 <div class="notice-pill">
                     <span class="pill-dot"></span>
@@ -730,6 +887,142 @@
         <p>CapKit Professional &copy; 2026 | Developed By <a href="https://sokei.top" target="_blank" style="color: var(--brand-red); text-decoration: none; font-weight: 700;">SOKEI</a></p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <!-- ═══ 激活成功弹窗 ═══ -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <button class="btn-modal-close" onclick="closeModal()">&times;</button>
+            <div class="success-icon-wrapper">✨</div>
+            <h2 class="modal-title">合成激活码成功！</h2>
+            <p class="modal-desc">恭喜您已解锁 CapKit Pro 全部专业功能。<br>请复制下方激活码并在软件中填入。</p>
+            
+            <div class="modal-license-box">
+                <code class="modal-license-code" id="modalLicenseKey"></code>
+                <button class="btn-modal-copy" id="btnModalCopy" onclick="copyModalLicense()">复制激活码</button>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.6;">* 激活码已与您的机器码 <span id="boundMachineId" style="color: var(--cny-gold); font-family: 'JetBrains Mono', monospace;"></span> 绑定</p>
+        </div>
+    </div>
+
+    <script>
+        // === 弹窗控制逻辑 ===
+        function showSuccessModal(licenseKey, machineId) {
+            const modal = document.getElementById('successModal');
+            const modalKey = document.getElementById('modalLicenseKey');
+            const boundMid = document.getElementById('boundMachineId');
+            
+            modalKey.textContent = licenseKey;
+            boundMid.textContent = machineId;
+            modal.classList.add('active');
+            
+            // 触发礼花特效
+            triggerConfetti();
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function triggerConfetti() {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 3000 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+                confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+            }, 250);
+        }
+
+        function copyModalLicense() {
+            const text = document.getElementById('modalLicenseKey').textContent;
+            const btn = document.getElementById('btnModalCopy');
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = '✅ 已复制到剪贴板';
+                btn.style.background = '#2ecc71';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        const form = document.getElementById('activateForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+        const btnText = document.getElementById('btnText');
+        const resultArea = document.getElementById('resultArea');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultMsg = document.getElementById('resultMsg');
+        const licenseBox = document.getElementById('licenseBox');
+        const licenseKeyEl = document.getElementById('licenseKey');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            spinner.style.display = 'block';
+            btnText.textContent = '正在验证...';
+            resultArea.style.display = 'none';
+            resultArea.className = 'result-area';
+
+            const redeemCode = document.getElementById('redeemCode').value;
+            const machineId = document.getElementById('machineId').value;
+
+            try {
+                const response = await fetch('/api/activate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        redeem_code: redeemCode,
+                        machine_id: machineId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showSuccessModal(data.license_key, machineId);
+                } else {
+                    throw new Error(data.error || '激活失败，请稍后重试');
+                }
+            } catch (err) {
+                resultArea.style.display = 'block';
+                resultArea.classList.add('error');
+                resultTitle.textContent = '❌ 激活失败';
+                resultTitle.style.color = '#e74c3c';
+                resultMsg.textContent = err.message;
+                licenseBox.style.display = 'none';
+            } finally {
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                btnText.textContent = '合成激活码';
+            }
+        });
+
+        function copyLicense() {
+            const text = licenseKeyEl.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = originalText, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
