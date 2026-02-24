@@ -1,10 +1,4 @@
-const Redis = require('ioredis');
-
-// 初始化 Redis 客户端
-let redis;
-if (!redis) {
-    redis = new Redis(process.env.REDIS_URL);
-}
+const { kv } = require('@vercel/kv');
 
 export default async function handler(request, response) {
     if (request.method !== 'POST') return response.status(405).json({ error: 'Method Not Allowed' });
@@ -14,8 +8,7 @@ export default async function handler(request, response) {
         if (!machine_id) return response.status(400).json({ error: 'Missing machine_id' });
 
         const cleanMachineId = machine_id.trim();
-        const recordStr = await redis.get(`machine:${cleanMachineId}`);
-        const record = recordStr ? JSON.parse(recordStr) : null;
+        const record = await kv.get(`machine:${cleanMachineId}`);
 
         if (!record) {
             return response.status(404).json({ error: '未找到该设备的激活记录' });
