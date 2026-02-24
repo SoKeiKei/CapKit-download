@@ -6,12 +6,12 @@ CapKit 是一款为视频创作者量身打造的剪映（CapCut）模板管理�
 
 ---
 
-## 📥 官方版本下载 (v0.1.7)
+## 📥 官方版本下载
 
 | 平台 | 下载链接 | 安全校验 (SHA256) |
 | :--- | :--- | :--- |
-| **Windows** | [下载 capkit.0.1.7.exe](https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.7/capkit.0.1.7.exe) | `cd7a0fb2915cd146d5ec02e24e7d6d31a06121bf12befa3360bdf121ec1b0339` |
-| **macOS (Universal)** | [下载 capkit_0.1.7_universal.dmg](https://github.com/SoKeiKei/CapKit-download/releases/download/0.1.7/capkit_0.1.7_universal.dmg) | `ca5f9e15046c1f6b43fe727eef9c67e04e00ba163a7829e0b1520b96c7a6d848` |
+| **Windows** | [下载 capkit.0.1.*.exe](https://github.com/SoKeiKei/CapKit-download/releases) | `cd7a0fb2915cd146d5ec02e24e7d6d31a06121bf12befa3360bdf121ec1b0339` |
+| **macOS (Universal)** | [下载 capkit_0.1.*_universal.dmg](https://github.com/SoKeiKei/CapKit-download/releases) | `ca5f9e15046c1f6b43fe727eef9c67e04e00ba163a7829e0b1520b96c7a6d848` |
 
 > [!TIP]
 > **备用下载点**：[百度网盘 (提取码: 8888)](https://pan.baidu.com/s/1K9VAkGsY2Gq-MhHSrdWjCg?pwd=8888)

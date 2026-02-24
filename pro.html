@@ -780,7 +780,7 @@
                             </button>
                         </form>
                         <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem;">
-                            <a href="javascript:void(0)" onclick="switchMode('query')" style="color: var(--text-secondary); text-decoration: none;">忘记兑换码？尝试通过机器码找回</a>
+                            <a href="javascript:void(0)" onclick="switchMode('query')" style="color: var(--text-secondary); text-decoration: none;">忘记激活码？尝试通过机器码找回</a>
                         </p>
                     </div>
 
@@ -1013,6 +1013,40 @@
             });
         }
 
+        // === 机器码合法性校验 ===
+        function validateMachineId(mid) {
+            const genericUuids = [
+                '03000200-0400-0500-0006-000700080009',
+                'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF',
+                '00000000-0000-0000-0000-000000000000'
+            ];
+
+            const trimmedMid = mid.trim();
+
+            // 1. 拦截通用 UUID
+            if (genericUuids.includes(trimmedMid)) {
+                return {
+                    valid: false,
+                    message: '⚠️ 检测到通用测试机器码。请下载并运行最新版 CapKit 以生成唯一的机器码，否则激活将无法绑定到您的设备。'
+                };
+            }
+
+            // 2. 格式校验 (支持 32位十六进制 或 36位带连字符的 UUID)
+            // 允许的格式：8-4-4-4-12 或 纯32位
+            const uuidRegex = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i;
+            const hex32Regex = /^[0-9A-F]{32}$/i;
+            const shortUuidRegex = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/i; // 兼容部分旧版缩写
+
+            if (!uuidRegex.test(trimmedMid) && !hex32Regex.test(trimmedMid) && !shortUuidRegex.test(trimmedMid)) {
+                return {
+                    valid: false,
+                    message: '❌ 机器码格式不正确。请确保从 CapKit 软件中完整复制。如果问题持续，请更新程序或在 B 站私信联系作者。'
+                };
+            }
+
+            return { valid: true };
+        }
+
         // === 激活表单处理 ===
         const form = document.getElementById('activateForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -1027,14 +1061,22 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            submitBtn.disabled = true;
-            spinner.style.display = 'block';
-            btnText.textContent = '正在验证...';
-            resultArea.style.display = 'none';
-            resultArea.className = 'result-area';
-
             const redeemCode = document.getElementById('redeemCode').value;
             const machineId = document.getElementById('machineId').value;
+
+            // 前端校验
+            const validation = validateMachineId(machineId);
+            if (!validation.valid) {
+                resultArea.style.display = 'block';
+                resultArea.classList.add('error');
+                resultTitle.textContent = '❌ 校验未通过';
+                resultTitle.style.color = '#e74c3c';
+                resultMsg.innerHTML = validation.message;
+                licenseBox.style.display = 'none';
+                return;
+            }
+            
+            submitBtn.disabled = true;
 
             try {
                 const response = await fetch('/api/activate', {
@@ -1051,7 +1093,7 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    showSuccessModal(data.license_key, machineId, true);
+                    showSuccessModal(data.license_key, machineId, false); // 激活模式：需要礼花
                 } else {
                     throw new Error(data.error || '激活失败，请稍后重试');
                 }
@@ -1078,13 +1120,21 @@
         queryForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            querySubmitBtn.disabled = true;
-            querySpinner.style.display = 'block';
-            queryBtnText.textContent = '正在查询...';
-            resultArea.style.display = 'none';
-            resultArea.className = 'result-area';
-
             const machineId = document.getElementById('queryMachineId').value;
+
+            // 前端校验
+            const validation = validateMachineId(machineId);
+            if (!validation.valid) {
+                resultArea.style.display = 'block';
+                resultArea.classList.add('error');
+                resultTitle.textContent = '❌ 校验未通过';
+                resultTitle.style.color = '#e74c3c';
+                resultMsg.innerHTML = validation.message;
+                licenseBox.style.display = 'none';
+                return;
+            }
+
+            querySubmitBtn.disabled = true;
 
             try {
                 const response = await fetch('/api/query', {
@@ -1100,7 +1150,7 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    showSuccessModal(data.license_key, machineId);
+                    showSuccessModal(data.license_key, machineId, true); // 找回模式：不放礼花
                 } else {
                     throw new Error(data.error || '未找到激活记录');
                 }
