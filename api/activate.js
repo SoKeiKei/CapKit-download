@@ -26,6 +26,17 @@ export default async function handler(request, response) {
     if (request.method !== 'POST') return response.status(405).json({ error: 'Method Not Allowed' });
 
     try {
+        // === 频率限制 (Rate Limiting) ===
+        const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress;
+        const rateKey = `rate:activate:${ip}`;
+        const currentRate = await redis.incr(rateKey);
+        if (currentRate === 1) {
+            await redis.expire(rateKey, 60); // 1分钟过期
+        }
+        if (currentRate > 5) {
+            return response.status(429).json({ error: '请求过于频繁，请稍后再试' });
+        }
+
         const { redeem_code, machine_id } = request.body;
         if (!redeem_code || !machine_id) return response.status(400).json({ error: 'Missing redeem_code or machine_id' });
 

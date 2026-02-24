@@ -944,17 +944,33 @@
         }
 
         // === 弹窗控制逻辑 ===
-        function showSuccessModal(licenseKey, machineId) {
+        function showSuccessModal(licenseKey, machineId, isQuery = false) {
             const modal = document.getElementById('successModal');
             const modalKey = document.getElementById('modalLicenseKey');
             const boundMid = document.getElementById('boundMachineId');
+            const modalTitle = document.querySelector('.modal-title');
+            const modalDesc = document.querySelector('.modal-desc');
+            const iconWrapper = document.querySelector('.success-icon-wrapper');
             
             modalKey.textContent = licenseKey;
             boundMid.textContent = machineId;
-            modal.classList.add('active');
             
-            // 触发礼花特效
-            triggerConfetti();
+            if (isQuery) {
+                // 找回模式：朴素风格
+                modalTitle.textContent = '找回成功';
+                modalDesc.innerHTML = '这是您之前绑定的激活码。<br>请复制并在软件中填入。';
+                iconWrapper.textContent = '🔍';
+                // 不触发礼花
+            } else {
+                // 激活模式：隆重风格
+                modalTitle.textContent = '激活成功！';
+                modalDesc.innerHTML = '恭喜您已解锁 CapKit Pro 全部专业功能。<br>请复制下方激活码并在软件中填入。';
+                iconWrapper.textContent = '✨';
+                // 触发礼花特效
+                triggerConfetti();
+            }
+            
+            modal.classList.add('active');
         }
 
         function closeModal() {
@@ -1035,7 +1051,7 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    showSuccessModal(data.license_key, machineId);
+                    showSuccessModal(data.license_key, machineId, true);
                 } else {
                     throw new Error(data.error || '激活失败，请稍后重试');
                 }
