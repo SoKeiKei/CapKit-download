@@ -762,22 +762,44 @@
                 <h2 class="section-title" style="margin-bottom: 2.5rem;">自助激活中心</h2>
                 
                 <div class="activation-card">
-                    <form id="activateForm">
-                        <div class="form-group">
-                            <label class="form-label">兑换码 (请作者喝咖啡后获得)</label>
-                            <input type="text" id="redeemCode" class="form-input" placeholder="例如: CAP-ABCD-1234-EFGH" required>
-                        </div>
+                    <div id="activationMode">
+                        <form id="activateForm">
+                            <div class="form-group">
+                                <label class="form-label">兑换码 (请作者喝咖啡后获得)</label>
+                                <input type="text" id="redeemCode" class="form-input" placeholder="例如: CAP-ABCD-1234-EFGH" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="form-label">机器码 (在 CapKit 软件中复制)</label>
-                            <input type="text" id="machineId" class="form-input" placeholder="例如: 9C2N-8B2A-XXXX-XXXX" required>
-                        </div>
+                            <div class="form-group">
+                                <label class="form-label">机器码 (在 CapKit 软件中复制)</label>
+                                <input type="text" id="machineId" class="form-input" placeholder="例如: 9C2N-8B2A-XXXX-XXXX" required>
+                            </div>
 
-                        <button type="submit" class="btn-activate" id="submitBtn">
-                            <div class="loading-spinner" id="spinner"></div>
-                            <span id="btnText">合成激活码</span>
-                        </button>
-                    </form>
+                            <button type="submit" class="btn-activate" id="submitBtn">
+                                <div class="loading-spinner" id="spinner"></div>
+                                <span id="btnText">合成激活码</span>
+                            </button>
+                        </form>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem;">
+                            <a href="javascript:void(0)" onclick="switchMode('query')" style="color: var(--text-secondary); text-decoration: none;">忘记兑换码？尝试通过机器码找回</a>
+                        </p>
+                    </div>
+
+                    <div id="queryMode" style="display: none;">
+                        <form id="queryForm">
+                            <div class="form-group">
+                                <label class="form-label">机器码 (在 CapKit 软件中复制)</label>
+                                <input type="text" id="queryMachineId" class="form-input" placeholder="例如: 9C2N-8B2A-XXXX-XXXX" required>
+                            </div>
+
+                            <button type="submit" class="btn-activate" id="querySubmitBtn">
+                                <div class="loading-spinner" id="querySpinner"></div>
+                                <span id="queryBtnText">找回激活码</span>
+                            </button>
+                        </form>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem;">
+                            <a href="javascript:void(0)" onclick="switchMode('activate')" style="color: var(--text-secondary); text-decoration: none;">返回合成激活码</a>
+                        </p>
+                    </div>
 
                     <div id="resultArea" class="result-area">
                         <h3 id="resultTitle" style="margin-bottom: 0.5rem; color: #2ecc71;">合成激活码成功！</h3>
@@ -905,6 +927,22 @@
     </div>
 
     <script>
+        // === 模式切换 ===
+        function switchMode(mode) {
+            const activationMode = document.getElementById('activationMode');
+            const queryMode = document.getElementById('queryMode');
+            const resultArea = document.getElementById('resultArea');
+            
+            resultArea.style.display = 'none';
+            if (mode === 'query') {
+                activationMode.style.display = 'none';
+                queryMode.style.display = 'block';
+            } else {
+                activationMode.style.display = 'block';
+                queryMode.style.display = 'none';
+            }
+        }
+
         // === 弹窗控制逻辑 ===
         function showSuccessModal(licenseKey, machineId) {
             const modal = document.getElementById('successModal');
@@ -959,6 +997,7 @@
             });
         }
 
+        // === 激活表单处理 ===
         const form = document.getElementById('activateForm');
         const submitBtn = document.getElementById('submitBtn');
         const spinner = document.getElementById('spinner');
@@ -1011,6 +1050,55 @@
                 submitBtn.disabled = false;
                 spinner.style.display = 'none';
                 btnText.textContent = '合成激活码';
+            }
+        });
+
+        // === 查询表单处理 ===
+        const queryForm = document.getElementById('queryForm');
+        const querySubmitBtn = document.getElementById('querySubmitBtn');
+        const querySpinner = document.getElementById('querySpinner');
+        const queryBtnText = document.getElementById('queryBtnText');
+
+        queryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            querySubmitBtn.disabled = true;
+            querySpinner.style.display = 'block';
+            queryBtnText.textContent = '正在查询...';
+            resultArea.style.display = 'none';
+            resultArea.className = 'result-area';
+
+            const machineId = document.getElementById('queryMachineId').value;
+
+            try {
+                const response = await fetch('/api/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        machine_id: machineId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showSuccessModal(data.license_key, machineId);
+                } else {
+                    throw new Error(data.error || '未找到激活记录');
+                }
+            } catch (err) {
+                resultArea.style.display = 'block';
+                resultArea.classList.add('error');
+                resultTitle.textContent = '❌ 查询失败';
+                resultTitle.style.color = '#e74c3c';
+                resultMsg.textContent = err.message;
+                licenseBox.style.display = 'none';
+            } finally {
+                querySubmitBtn.disabled = false;
+                querySpinner.style.display = 'none';
+                queryBtnText.textContent = '找回激活码';
             }
         });
 
