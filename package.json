@@ -4,7 +4,7 @@
   "description": "Serverless function for CapKit activation",
   "main": "api/activate.js",
   "dependencies": {
-    "@vercel/kv": "^1.0.1",
+    "@upstash/redis": "^1.28.4",
     "tweetnacl": "^1.0.3",
     "tweetnacl-util": "^0.15.1"
   }

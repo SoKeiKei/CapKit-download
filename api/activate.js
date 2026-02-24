@@ -1,6 +1,12 @@
-const { kv } = require('@vercel/kv');
+const { Redis } = require('@upstash/redis');
 const nacl = require('tweetnacl');
 const naclUtil = require('tweetnacl-util');
+
+// 显式初始化 Redis 客户端
+const redis = new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
+});
 
 function decodeBase64(s) { return naclUtil.decodeBase64(s); }
 function encodeBase64(arr) { return naclUtil.encodeBase64(arr); }
@@ -27,7 +33,7 @@ export default async function handler(request, response) {
         const cleanMachineId = machine_id.trim();
         const dbKey = `redeem:${cleanCode}`;
         
-        const record = await kv.get(dbKey);
+        const record = await redis.get(dbKey);
 
         if (!record) return response.status(404).json({ error: '无效的兑换码' });
 
@@ -46,13 +52,13 @@ export default async function handler(request, response) {
 
         if (record.status !== 'used') {
             await Promise.all([
-                kv.set(dbKey, {
+                redis.set(dbKey, {
                     status: 'used',
                     machine_id: cleanMachineId,
                     license_key: licenseKey,
                     activated_at: new Date().toISOString()
                 }),
-                kv.set(`machine:${cleanMachineId}`, {
+                redis.set(`machine:${cleanMachineId}`, {
                     license_key: licenseKey,
                     redeem_code: cleanCode,
                     updated_at: new Date().toISOString()
