@@ -1,6 +1,12 @@
-const { kv } = require('@vercel/kv');
+const Redis = require('ioredis');
 const nacl = require('tweetnacl');
 const naclUtil = require('tweetnacl-util');
+
+// 初始化 Redis 客户端 (复用连接)
+let redis;
+if (!redis) {
+    redis = new Redis(process.env.REDIS_URL);
+}
 
 function decodeBase64(s) { return naclUtil.decodeBase64(s); }
 function encodeBase64(arr) { return naclUtil.encodeBase64(arr); }
@@ -26,7 +32,10 @@ export default async function handler(request, response) {
         const cleanCode = redeem_code.trim();
         const cleanMachineId = machine_id.trim();
         const dbKey = `redeem:${cleanCode}`;
-        const record = await kv.get(dbKey);
+        
+        // 从 Redis 获取数据 (ioredis 返回的是 JSON 字符串，需要 parse)
+        const recordStr = await redis.get(dbKey);
+        const record = recordStr ? JSON.parse(recordStr) : null;
 
         if (!record) return response.status(404).json({ error: '无效的兑换码' });
 
@@ -47,18 +56,22 @@ export default async function handler(request, response) {
 
         // 如果是首次激活，写入双向记录
         if (record.status !== 'used') {
+            const newRecord = {
+                status: 'used',
+                machine_id: cleanMachineId,
+                license_key: licenseKey,
+                activated_at: new Date().toISOString()
+            };
+            
+            const machineRecord = {
+                license_key: licenseKey,
+                redeem_code: cleanCode,
+                updated_at: new Date().toISOString()
+            };
+
             await Promise.all([
-                kv.set(dbKey, {
-                    status: 'used',
-                    machine_id: cleanMachineId,
-                    license_key: licenseKey,
-                    activated_at: new Date().toISOString()
-                }),
-                kv.set(`machine:${cleanMachineId}`, {
-                    license_key: licenseKey,
-                    redeem_code: cleanCode,
-                    updated_at: new Date().toISOString()
-                })
+                redis.set(dbKey, JSON.stringify(newRecord)),
+                redis.set(`machine:${cleanMachineId}`, JSON.stringify(machineRecord))
             ]);
         }
 
