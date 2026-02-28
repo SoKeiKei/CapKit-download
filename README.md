@@ -32,9 +32,6 @@ CapKit 是一款为视频创作者量身打造的剪映（CapCut）模板管理�
 
 CapKit 采用 Rust 构建，经过 70+ 主流杀毒引擎严格检测，不篡改剪映核心数据，不上传隐私信息。
 
-- [Windows 版安全报告 (VirusTotal)](https://www.virustotal.com/gui/file/cd7a0fb2915cd146d5ec02e24e7d6d31a06121bf12befa3360bdf121ec1b0339)
-- [macOS 版安全报告 (VirusTotal)](https://www.virustotal.com/gui/file/ca5f9e15046c1f6b43fe727eef9c67e04e00ba163a7829e0b1520b96c7a6d848)
-
 ---
 
 ## 💬 官方频道 & 支持

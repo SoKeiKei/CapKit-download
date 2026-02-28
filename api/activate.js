@@ -48,12 +48,8 @@ export default async function handler(request, response) {
 
         if (!record) return response.status(404).json({ error: '无效的兑换码' });
 
-        if (record.status === 'used') {
-            if (record.machine_id !== cleanMachineId) {
-                return response.status(403).json({ error: '此兑换码已被其他设备绑定' });
-            } else {
-                return response.status(409).json({ error: '此兑换码已激活，如需找回激活码请使用“找回激活码”功能' });
-            }
+        if (record.status === 'used' && record.machine_id !== cleanMachineId) {
+            return response.status(403).json({ error: '此兑换码已被其他设备绑定' });
         }
 
         const seed = getPrivateKey();

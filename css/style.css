@@ -800,68 +800,35 @@ body {
 
 @media (max-width: 768px) {
     .modern-nav {
-        padding: 1rem 1.2rem;
+        padding: 1rem 1.5rem;
     }
 
     .nav-menu {
-        display: flex; /* 保持显示容器 */
-        margin-left: auto; /* 推到右侧 */
-    }
-
-    .nav-menu a:not(.nav-link-pro) {
-        display: none; /* 隐藏普通链接 */
-    }
-
-    .nav-link-pro {
-        margin-left: 0;
-        padding: 4px 10px;
-        font-size: 0.8rem;
-    }
-
-    /* 移动端隐藏顶部下载按钮，避免拥挤 */
-    #sticky-download {
-        display: none !important;
-    }
-
-    .hero-wrapper {
-        padding: 6rem 1.5rem 3rem;
-        min-height: auto;
+        display: none; /* Mobile menu implementation omitted for speed, keeping clean */
     }
 
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         letter-spacing: -1px;
-        margin-bottom: 1rem;
     }
 
     .hero-desc {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-        padding: 0 1rem; /* 增加左右内边距防止文字贴边 */
+        font-size: 1rem;
     }
 
     .action-row {
         flex-direction: column;
         width: 100%;
-        gap: 0.8rem;
     }
 
-    .download-group {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.8rem;
-    }
-
-    .btn-fill, .btn-outline, .btn-mac-fill, .btn-pro-gold {
+    .btn-fill, .btn-outline {
         width: 100%;
         justify-content: center;
-        height: 44px; /* 稍微减小高度 */
-        font-size: 0.95rem;
     }
 
     .bento-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .span-2 { grid-column: auto; }
@@ -869,23 +836,11 @@ body {
 
     .bento-card {
         padding: 1.5rem;
-        min-height: 160px;
+        min-height: 200px;
     }
 
     .card-icon-lg {
-        font-size: 4rem;
-        bottom: -10px;
-        right: -10px;
-    }
-    
-    .features-container {
-        padding: 3rem 1.5rem 2rem;
-    }
-
-    .app-window {
-        transform: none !important;
-        margin-top: 3rem;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        font-size: 5rem;
     }
 }
 
@@ -979,24 +934,14 @@ body {
 
 @media (max-width: 768px) {
     .faq-section {
-        padding: 3rem 1.5rem;
+        padding: 6rem 1.5rem;
     }
     .faq-title {
-        font-size: 1.8rem;
-        margin-bottom: 2rem;
+        font-size: 2rem;
     }
     .faq-item summary {
-        padding: 1rem 1.2rem;
-        font-size: 0.95rem;
-    }
-    .faq-answer {
-        padding: 0 1.2rem 1.2rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    .simple-footer {
-        padding: 2rem 1.5rem;
-        font-size: 0.75rem;
+        padding: 1.2rem 1.5rem;
+        font-size: 1rem;
     }
 }
 

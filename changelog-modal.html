@@ -1,0 +1,280 @@
+<!-- 更新日志弹窗内容 -->
+<style>
+    /* 更新日志弹窗样式 */
+    .changelog-modal-content {
+        background: var(--surface-color);
+        border: 1px solid var(--border-subtle);
+        border-radius: 20px;
+        width: 90%;
+        max-width: 680px;
+        max-height: 85vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transform: scale(0.9) translateY(20px);
+        transition: transform 0.3s ease;
+    }
+
+    .changelog-modal.visible .changelog-modal-content {
+        transform: scale(1) translateY(0);
+    }
+
+    .changelog-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 28px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .changelog-modal-header h2 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--text-primary), var(--brand-red));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .changelog-close {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.2s;
+    }
+
+    .changelog-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+    }
+
+    .changelog-modal-body {
+        padding: 24px 28px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .changelog-version {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 16px;
+        transition: all 0.3s;
+    }
+
+    .changelog-version:hover {
+        border-color: rgba(254, 44, 85, 0.2);
+    }
+
+    .changelog-version.latest {
+        border-color: var(--brand-red);
+        box-shadow: 0 0 30px rgba(254, 44, 85, 0.1);
+    }
+
+    .changelog-version .version-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .changelog-version .version-number {
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .changelog-version .version-badge {
+        background: var(--brand-red);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 99px;
+        text-transform: uppercase;
+    }
+
+    .changelog-version .version-date {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        margin-left: auto;
+    }
+
+    .version-section {
+        margin-bottom: 16px;
+    }
+
+    .version-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .version-section h4 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+    }
+
+    .version-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .version-section li {
+        position: relative;
+        padding-left: 16px;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .version-section li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 5px;
+        height: 5px;
+        background: var(--brand-red);
+        border-radius: 50%;
+    }
+
+    .version-section li strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    /* 滚动条样式 */
+    .changelog-modal-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .changelog-modal-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .changelog-modal-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+    }
+
+    .changelog-modal-body::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .changelog-modal-content {
+            width: 95%;
+            max-height: 90vh;
+        }
+
+        .changelog-modal-header {
+            padding: 20px;
+        }
+
+        .changelog-modal-body {
+            padding: 20px;
+        }
+
+        .changelog-version {
+            padding: 16px;
+        }
+    }
+</style>
+
+<div class="changelog-modal-content">
+    <div class="changelog-modal-header">
+        <h2>更新日志</h2>
+        <button class="changelog-close" onclick="closeChangelogModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+    <div class="changelog-modal-body">
+        <!-- v0.1.8 -->
+        <div class="changelog-version latest">
+            <div class="version-header">
+                <span class="version-number">V0.1.8</span>
+                <span class="version-badge">最新</span>
+                <span class="version-date">2026-02-28</span>
+            </div>
+            <div class="version-section">
+                <h4>🚀 性能大幅提升</h4>
+                <ul>
+                    <li><strong>流式扫描引擎</strong>：重构模板扫描逻辑，支持实时流式加载，告别白屏等待</li>
+                    <li><strong>并行处理增强</strong>：优化多线程调度，海量文件响应速度提升 30%+</li>
+                </ul>
+            </div>
+            <div class="version-section">
+                <h4>🎬 预览视频匹配更精准</h4>
+                <ul>
+                    <li>优化视频匹配算法，大幅降低误判率</li>
+                </ul>
+            </div>
+            <div class="version-section">
+                <h4>🧹 重复模板清理升级</h4>
+                <ul>
+                    <li><strong>指纹算法升级</strong>：正确识别序号前缀不同的同一模板副本</li>
+                    <li><strong>同目录重复清理</strong>：同目录内的重复模板也能一键清除</li>
+                    <li><strong>删除后实时刷新</strong>：已删除项即时从列表消失</li>
+                    <li><strong>无模板目录检测</strong>：扫描不含有效模板的目录并支持删除</li>
+                    <li><strong>UI 优化升级</strong>：新增预估可释放空间提示</li>
+                </ul>
+            </div>
+            <div class="version-section">
+                <h4>🛡️ 安全与稳定性</h4>
+                <ul>
+                    <li>修复特定硬件环境下机器码锁定漏洞</li>
+                    <li>修复特殊 Unicode 字符导致的崩溃问题</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- v0.1.7.1 -->
+        <div class="changelog-version">
+            <div class="version-header">
+                <span class="version-number">V0.1.7.1</span>
+                <span class="version-date">2026-02-24</span>
+            </div>
+            <div class="version-section">
+                <h4>🔐 安全与稳定性加固</h4>
+                <ul>
+                    <li>加固机器码机制，避免授权失效</li>
+                    <li>优化校验性能，响应速度提升至微秒级</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- v0.1.7 -->
+        <div class="changelog-version">
+            <div class="version-header">
+                <span class="version-number">V0.1.7</span>
+                <span class="version-date">2026-02-23</span>
+            </div>
+            <div class="version-section">
+                <h4>✨ 重点新功能</h4>
+                <ul>
+                    <li><strong>智能分类管理</strong>：支持手动创建分类，拖拽调整顺序</li>
+                    <li><strong>星标收藏系统</strong>：重要模板一键直达</li>
+                    <li><strong>批量管理模式</strong>：支持多选批量操作</li>
+                </ul>
+            </div>
+            <div class="version-section">
+                <h4>⚡ 体验优化</h4>
+                <ul>
+                    <li>重构底层扫描引擎，加载速度提升数倍</li>
+                    <li>支持最新 M3/M4 系列芯片 Mac</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
