@@ -77,8 +77,8 @@ body {
 /* Nav */
 .modern-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     padding: 1.5rem 1.5rem;
     position: fixed;
     top: 0;
@@ -87,6 +87,26 @@ body {
     backdrop-filter: blur(16px); /* 增加模糊度 */
     background: rgba(20, 20, 20, 0.75); /* 更深的暗背景 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 更柔和的边缘 */
+}
+
+.nav-announcement {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.announcement-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-weight: 500;
+}
+
+.announcement-text strong {
+    color: var(--brand-red);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
 }
 
 .brand-logo {
@@ -830,6 +850,18 @@ body {
 @media (max-width: 768px) {
     .modern-nav {
         padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .nav-announcement {
+        order: 3;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .announcement-text {
+        font-size: 0.75rem;
     }
 
     .nav-menu {
