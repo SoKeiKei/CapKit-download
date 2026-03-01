@@ -4,6 +4,35 @@
     padding: 0;
 }
 
+/* 公告横幅样式 */
+.announcement-banner {
+    background: linear-gradient(90deg, rgba(254, 44, 85, 0.15) 0%, rgba(254, 44, 85, 0.05) 100%);
+    border-bottom: 1px solid rgba(254, 44, 85, 0.3);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.announcement-banner strong {
+    color: #fe2c55;
+    font-family: 'JetBrains Mono', monospace;
+}
+.announcement-icon {
+    font-size: 14px;
+}
+.announcement-divider {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 8px;
+}
+.announcement-note {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
 :root {
     --bg-color: #121212;
     --surface-color: #1e1e1e;

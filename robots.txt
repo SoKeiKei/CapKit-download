@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://c.sokei.top/sitemap.xml
+Sitemap: https://capkit.top/sitemap.xml

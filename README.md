@@ -36,7 +36,7 @@ CapKit 采用 Rust 构建，经过 70+ 主流杀毒引擎严格检测，不篡�
 
 ## 💬 官方频道 & 支持
 
-- **主页**：[c.sokei.top](https://c.sokei.top)
+- **主页**：[c.sokei.top](https://capkit.top)
 - **B站**：[@SoKei - 查看视频演示](https://space.bilibili.com/3546772855064749)
 - **开发者**：[SOKEI](https://sokei.top)
 
