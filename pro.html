@@ -695,6 +695,11 @@
             </svg>
             <span>apkit</span>
         </div>
+        <button class="menu-toggle" id="mobile-menu-toggle" aria-label="切换菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="nav-menu">
             <a href="index.html">返回首页</a>
             <a href="index.html#features">基础功能</a>
@@ -940,6 +945,25 @@
     </div>
 
     <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
         // === 模式切换 ===
         function switchMode(mode) {
             const activationMode = document.getElementById('activationMode');
