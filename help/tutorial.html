@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapKit 操作教程</title>
+  <link href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cap-primary: #fe2c55;
+      --cap-primary-light: #ff4d7a;
+      --cap-primary-dark: #d92447;
+      --cap-dark: #121212;
+      --cap-gray: #1e1e1e;
+      --cap-light: #ffffff;
+      --cap-bg-dark: #0a0a0f;
+      --cap-bg-card: rgba(30, 30, 30, 0.85);
+      --cap-bg-sidebar: rgba(22, 22, 31, 0.95);
+      --cap-text: #ffffff;
+      --cap-text-muted: #8a8a9a;
+      --cap-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: clamp(12px, 1.5vw, 18px); }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+      background: var(--cap-dark);
+      color: var(--cap-text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .presentation {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #0d0d12 0%, #1a1a24 50%, #0f0f18 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 1000;
+    }
+
+    .orb {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+      transition: transform 0.12s ease-out;
+    }
+
+    .orb-1 { background: var(--cap-primary); top: -150px; right: -150px; }
+    .orb-2 { background: #6366f1; bottom: -150px; left: -150px; }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: clamp(30px, 4vw, 50px) clamp(30px, 4vw, 50px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide-container {
+      width: calc(100% - 160px);
+      max-width: calc(100% - 160px);
+      height: calc(100vh - 180px);
+      max-height: calc(100vh - 220px);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), 0 0 1px rgba(254,44,85,0.5);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(2rem, 4vw, 4rem) clamp(2.5rem, 5vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active { opacity: 1; visibility: visible; z-index: 20; }
+    .slide.prev { transform: translateY(20px); opacity: 0; }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .content-left { flex: 0 0 35%; }
+    .content-right { flex: 1; }
+
+    .slide-title {
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.75) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-title span { color: var(--cap-primary); -webkit-text-fill-color: var(--cap-primary); }
+
+    .slide-subtitle {
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+      color: var(--cap-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .glass-card {
+      background: var(--cap-bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--cap-border);
+      border-radius: 16px;
+    }
+
+    .feature-list { list-style: none; }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--cap-border);
+    }
+    .feature-icon {
+      width: 2rem;
+      height: 2rem;
+      background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .feature-text h4 {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .feature-text p {
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      color: var(--cap-text-muted);
+      line-height: 1.5;
+    }
+
+    .steps-container { display: flex; flex-direction: column; gap: 1.2rem; }
+    .step { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .step-number {
+      width: 2.4rem;
+      height: 2.4rem;
+      background: var(--cap-primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      color: var(--cap-text-muted);
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(254,44,85,0.12), rgba(254,44,85,0.05));
+      border: 1px solid rgba(254,44,85,0.35);
+      border-radius: 12px;
+      padding: 1.3rem;
+      margin-top: 1.3rem;
+    }
+    .highlight-box h4 {
+      color: var(--cap-primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .highlight-box p {
+      color: var(--cap-text-muted);
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      line-height: 1.5;
+    }
+
+    /* 设置弹窗复刻 */
+    .settings-mock {
+      background: var(--cap-gray);
+      border: 1px solid var(--cap-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    }
+
+    .settings-header {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--cap-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .settings-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .settings-version {
+      font-size: 0.65rem;
+      color: var(--cap-primary);
+      background: rgba(254,44,85,0.15);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .settings-close {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      color: var(--cap-text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .settings-close:hover { background: rgba(255,255,255,0.1); color: var(--cap-text); }
+
+    .settings-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .settings-section {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--cap-border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .settings-section-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .settings-section-title .dot { width: 6px; height: 6px; background: #fbbf24; border-radius: 50%; }
+
+    .settings-input-row { display: flex; gap: 8px; }
+
+    .settings-input {
+      flex: 1;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--cap-border);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      color: var(--cap-text);
+      font-size: 0.7rem;
+      font-family: monospace;
+      outline: none;
+    }
+    .settings-input:focus { border-color: rgba(254,44,85,0.4); }
+
+    .settings-btn {
+      background: rgba(254,44,85,0.15);
+      border: 1px solid rgba(254,44,85,0.3);
+      color: var(--cap-primary);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .settings-btn:hover { background: var(--cap-primary); color: white; }
+
+    /* 模板网格复刻 */
+    .template-grid-mock {
+      background: var(--cap-gray);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .template-header {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--cap-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .template-search {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--cap-border);
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      color: var(--cap-text);
+      font-size: 0.75rem;
+      width: 180px;
+    }
+
+    .template-sort {
+      display: flex;
+      gap: 4px;
+      background: rgba(0,0,0,0.3);
+      padding: 3px;
+      border-radius: 6px;
+    }
+
+    .sort-btn {
+      padding: 4px 10px;
+      font-size: 0.6rem;
+      border: none;
+      background: transparent;
+      color: var(--cap-text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sort-btn.active { background: var(--cap-primary); color: white; }
+
+    .template-body { padding: 1rem; display: flex; gap: 1rem; flex: 1; }
+
+    .template-sidebar { width: 120px; display: flex; flex-direction: column; gap: 4px; }
+
+    .sidebar-item {
+      padding: 0.5rem 0.7rem;
+      font-size: 0.7rem;
+      color: var(--cap-text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sidebar-item:hover { background: rgba(255,255,255,0.05); }
+    .sidebar-item.active { background: var(--cap-primary); color: white; }
+
+    .template-cards {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+      align-content: start;
+    }
+
+    .template-card {
+      aspect-ratio: 16 / 10;
+      background: var(--cap-bg-card);
+      border: 1px solid var(--cap-border);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .template-card:hover {
+      border-color: var(--cap-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(254,44,85,0.2);
+    }
+
+    .card-actions {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      display: flex;
+      justify-content: space-around;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s;
+    }
+
+    .template-card:hover .card-actions { opacity: 1; transform: translateY(0); }
+
+    .card-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: white;
+      font-size: 0.55rem;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .card-action:hover { background: rgba(255,255,255,0.15); }
+    .card-action span:first-child { font-size: 1rem; }
+
+    /* 占位遮罩 */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: rgba(0,0,0,0.5);
+      border: 2px dashed var(--cap-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--cap-text-muted);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .video-placeholder:hover {
+      border-color: var(--cap-primary);
+      background: rgba(254,44,85,0.05);
+      transform: scale(1.02);
+    }
+
+    /* 视频元素样式 - 移除蒙版和边框 */
+    .video-placeholder[controls] {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .video-placeholder[controls]:hover {
+      background: transparent;
+      transform: none;
+    }
+
+    .placeholder-icon { font-size: clamp(2rem, 4vw, 3rem); opacity: 0.5; }
+    .placeholder-text { font-size: clamp(0.65rem, 1vw, 0.9rem); text-align: center; }
+    .placeholder-path {
+      font-size: 0.65rem;
+      opacity: 0.5;
+      font-family: monospace;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+
+    .player-ui {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem 0.8rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    }
+
+    .player-progress {
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      margin-bottom: 0.4rem;
+      overflow: hidden;
+    }
+
+    .player-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--cap-primary);
+      animation: progress 3s ease-in-out infinite;
+    }
+
+    @keyframes progress { 0%, 100% { width: 0%; } 50% { width: 65%; } }
+
+    .player-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.5);
+      font-family: 'SF Mono', monospace;
+    }
+
+    /* 封面页 */
+    .cover-slide .slide-content {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo { margin-bottom: 1.2rem; display: flex; align-items: flex-end; gap: 1px; font-size: clamp(3rem, 5vw, 4.5rem); }
+    .logo svg { width: 0.7em !important; height: auto; flex-shrink: 0; }
+    .logo span { font-weight: 700; letter-spacing: 0.08em; line-height: 1; }
+
+    .cover-title { font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -2px; }
+
+    .cover-subtitle { font-size: clamp(1rem, 1.6vw, 1.4rem); color: var(--cap-text-muted); margin-bottom: 2rem; }
+
+    .cover-meta { display: flex; gap: 2rem; font-size: clamp(0.7rem, 1vw, 0.9rem); color: var(--cap-text-muted); }
+
+    /* 结束页 */
+    .end-slide .slide-content { justify-content: center; align-items: center; }
+
+    .end-title { font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 700; margin-bottom: 1.2rem; }
+
+    .end-url { font-size: clamp(1.4rem, 2vw, 2rem); color: var(--cap-primary); margin-bottom: 2rem; font-weight: 600; }
+
+    /* 高级结束页样式 - 简洁大气版 */
+    .end-slide {
+      background: linear-gradient(180deg, #0a0a0f 0%, #0f0f18 50%, #14141f 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 动态光效背景 */
+    .end-slide .bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .end-slide .bg-glow-1 {
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(254,44,85,0.25) 0%, transparent 70%);
+      animation: glow-float 8s ease-in-out infinite;
+    }
+
+    .end-slide .bg-glow-2 {
+      bottom: -200px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+      animation: glow-float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes glow-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 20px) scale(1.1); }
+    }
+
+    /* 底部大光晕 */
+    .end-slide::before {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(254,44,85,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* 网格背景 */
+    .end-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    }
+
+    /* 粒子系统 */
+    .end-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(254,44,85,0.6);
+      border-radius: 50%;
+      animation: particle-float linear infinite;
+    }
+
+    .particle:nth-child(odd) { background: rgba(99,102,241,0.5); }
+
+    @keyframes particle-float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) scale(1); opacity: 0; }
+    }
+
+    /* 发光线条 */
+    .glow-line {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(254,44,85,0.3) 50%, transparent 100%);
+      animation: line-glow 4s ease-in-out infinite;
+    }
+
+    .glow-line:nth-child(1) { left: 20%; animation-delay: 0s; }
+    .glow-line:nth-child(2) { left: 40%; animation-delay: 1s; }
+    .glow-line:nth-child(3) { left: 60%; animation-delay: 2s; }
+    .glow-line:nth-child(4) { left: 80%; animation-delay: 3s; }
+
+    @keyframes line-glow {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.6; }
+    }
+
+    .end-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding-bottom: 3rem;
+    }
+
+    /* Logo */
+    .end-logo-wrap {
+      width: clamp(90px, 15vw, 130px);
+      height: clamp(90px, 15vw, 130px);
+      margin-bottom: 2rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: logo-enter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+
+    @keyframes logo-enter {
+      0% { opacity: 0; transform: scale(0.5); }
+      70% { transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .end-logo { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 2px; font-size: clamp(4rem, 8vw, 6rem); }
+
+    .end-logo { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 2px; font-size: clamp(4rem, 8vw, 6rem); }
+    .end-logo svg { width: 0.7em !important; height: auto; flex-shrink: 0; filter: drop-shadow(0 0 30px rgba(254,44,85,0.7)); }
+    .end-logo span { font-weight: 700; letter-spacing: 0.08em; line-height: 1; }
+
+    /* 主标题 */
+    .end-title {
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.85) 50%, rgba(254,44,85,0.3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 60px rgba(254,44,85,0.3);
+      animation: title-enter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
+    @keyframes title-enter {
+      0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* 副标题 */
+    .end-subtitle {
+      font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    }
+
+    /* 网址 */
+    .end-url {
+      font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 2px;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      text-decoration: none;
+      animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+    }
+
+    .end-url:hover {
+      border-color: rgba(254,44,85,0.4);
+      background: rgba(254,44,85,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* 感谢观看 */
+    .end-thanks {
+      font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-top: 3rem;
+      position: relative;
+      padding: 0.8rem 2rem;
+      animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+    }
+
+    /* 入场动画 */
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scale-in {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .end-thanks::before,
+    .end-thanks::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(254,44,85,0.5), transparent);
+    }
+
+    .end-thanks::before { right: 100%; }
+    .end-thanks::after { left: 100%; }
+
+    /* 导航 */
+    .navigation { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 100; }
+
+    .nav-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
+
+    .nav-dot.active { background: var(--cap-primary); width: 1.6rem; border-radius: 4px; }
+
+    .progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--cap-primary); transition: width 0.3s; z-index: 100; }
+
+    /* 动画 */
+    .text-reveal { opacity: 0; transform: translateY(20px); }
+
+    .slide.active .text-reveal { animation: reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .slide.active .text-reveal:nth-child(1) { animation-delay: 0.08s; }
+    .slide.active .text-reveal:nth-child(2) { animation-delay: 0.15s; }
+    .slide.active .text-reveal:nth-child(3) { animation-delay: 0.22s; }
+    .slide.active .text-reveal:nth-child(4) { animation-delay: 0.29s; }
+
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+
+    /* 导航栏样式 - 与主页一致 */
+    .modern-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 1.5rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1002;
+      backdrop-filter: blur(16px);
+      background: rgba(20, 20, 20, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .brand-logo svg {
+      margin-bottom: -1px;
+      margin-right: -2px;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .brand-logo:hover svg {
+      transform: rotate(-12deg);
+    }
+
+    /* 导航栏 Logo 链接样式 - 无下划线无色变 */
+    .nav-logo-link {
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .nav-logo-link .brand-logo {
+      color: #ffffff;
+    }
+    .nav-logo-link:hover .brand-logo {
+      color: #ffffff;
+    }
+
+    .nav-menu {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-left: 2rem;
+      transition: all 0.3s;
+      opacity: 0.6;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+      color: #fe2c55;
+    }
+
+    .nav-link-pro {
+      background: rgba(246, 173, 85, 0.1);
+      color: #f6ad55 !important;
+      padding: 4px 14px;
+      border-radius: 99px;
+      border: 1px solid rgba(246, 173, 85, 0.25);
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link-pro:hover {
+      background: rgba(246, 173, 85, 0.2);
+      border-color: rgba(246, 173, 85, 0.4);
+    }
+
+    /* 底部版权样式 */
+    .tutorial-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      z-index: 1002;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .tutorial-footer p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+    .tutorial-footer a {
+      color: #fe2c55;
+      text-decoration: none;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .tutorial-footer a:hover {
+      opacity: 0.8;
+    }
+    .tutorial-footer .footer-tagline {
+      margin-top: 0.8rem;
+      opacity: 0.4;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* 左右点击区域 - 限制在 slide-container 内部 */
+    .click-area {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 12%;
+      z-index: 100;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .click-area:hover {
+      background: rgba(254, 44, 85, 0.08);
+      border-radius: 20px;
+    }
+    .click-area-left {
+      left: 0;
+      border-radius: 20px 0 0 20px;
+    }
+    .click-area-right {
+      right: 0;
+      border-radius: 0 20px 20px 0;
+    }
+    .click-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(254, 44, 85, 0.15);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.2s;
+      border: 1px solid rgba(254, 44, 85, 0.3);
+    }
+    .click-area:hover .click-indicator {
+      opacity: 1;
+    }
+    .click-indicator svg {
+      stroke: #fff;
+      stroke-width: 2.5;
+    }
+
+    /* B 站链接样式 */
+    .bilibili-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(251, 114, 153, 0.15);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(251, 114, 153, 0.3);
+      color: #fb7299;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .bilibili-link:hover {
+      background: rgba(251, 114, 153, 0.25);
+      border-color: rgba(251, 114, 153, 0.5);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <nav class="modern-nav">
+    <a href="../index.html" class="nav-logo-link">
+      <div class="brand-logo">
+        <svg width="20" height="28" viewBox="4 0 12 24" fill="none" stroke="#fe2c55" stroke-width="3.5" style="margin-bottom: -1px; margin-right: -2px;">
+          <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
+        </svg>
+        <span>apkit</span>
+      </div>
+    </a>
+    <div class="nav-menu">
+      <a href="../index.html">主页</a>
+      <a href="../pro.html" class="nav-link-pro">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        Pro
+      </a>
+      <a href="https://space.bilibili.com/3546772855064749" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#FB7299" style="margin-bottom: -3px;">
+          <path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333-1.333z" fill-rule="evenodd"></path>
+        </svg>
+        Bilibili
+      </a>
+    </div>
+  </nav>
+
+  <div class="presentation">
+    <div class="noise-overlay"></div>
+    <div class="grid-bg"></div>
+    <div class="orb orb-1" id="orb1"></div>
+    <div class="orb orb-2" id="orb2"></div>
+
+    <div class="slide-container">
+      <!-- 左右点击区域 -->
+      <div class="click-area click-area-left" onclick="prevSlide()">
+        <div class="click-indicator">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18l-6-6 6-6" stroke-linecap="square"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-area click-area-right" onclick="nextSlide()">
+        <div class="click-indicator">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18l6-6-6-6" stroke-linecap="square"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Slide 1: 封面 -->
+      <div class="slide cover-slide active" data-slide="0">
+        <div class="slide-content">
+          <div class="logo text-reveal">
+            <svg width="40" height="60" viewBox="0 0 16 24" fill="none" stroke="#FE2C55" stroke-width="3.5">
+              <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
+            </svg>
+            <span>apkit</span>
+          </div>
+          <h1 class="cover-title text-reveal"><span class="highlight">完整功能演示</span></h1>
+          <div class="cover-meta text-reveal">
+            <a href="https://www.bilibili.com/video/BV1d9PizdE3u/" target="_blank" class="bilibili-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FB7299" style="margin-bottom: -3px;"><path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333-1.333z" fill-rule="evenodd"></path></svg> B 站完整演示</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: 初始化设置 -->
+      <div class="slide" data-slide="1">
+        <h2 class="slide-title text-reveal">1. <span>初始化设置</span></h2>
+        <p class="slide-subtitle text-reveal">点击右上角设置按钮，配置目录路径</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <div style="padding: 1.5rem;">
+              <div style="margin-bottom: 1.3rem;">
+                <h4 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: rgba(255,255,255,0.9);">配置步骤</h4>
+                <p style="font-size: 1rem; color: var(--cap-text-muted);">点击右上角设置按钮，打开配置中心</p>
+              </div>
+              <ul style="list-style: none;">
+                <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--cap-border);">
+                  <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">1</div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">剪映草稿目录</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">选择剪映草稿存放位置</p></div>
+                </li>
+                <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--cap-border);">
+                  <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">2</div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">模板仓库</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">添加本地模板存放目录</p></div>
+                </li>
+                <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0;">
+                  <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">3</div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">预览视频目录</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">配置视频预览文件位置</p></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/01-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: 刷新模板 -->
+      <div class="slide" data-slide="2">
+        <h2 class="slide-title text-reveal">2. <span>刷新模板</span></h2>
+        <p class="slide-subtitle text-reveal">点击顶部「刷新模板」按钮扫描导入</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <div class="steps-container">
+              <div class="step text-reveal">
+                <div class="step-number">1</div>
+                <div class="step-content"><h4>点击刷新按钮</h4><p>配置好路径后，点击顶部的「刷新模板」按钮</p></div>
+              </div>
+              <div class="step text-reveal">
+                <div class="step-number">2</div>
+                <div class="step-content"><h4>自动扫描导入</h4><p>CapKit 自动读取剪映模板库，导入到列表</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/02-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: 智能分类 -->
+      <div class="slide" data-slide="3">
+        <h2 class="slide-title text-reveal">3. <span>智能分类</span></h2>
+        <p class="slide-subtitle text-reveal">按物理文件夹自动分类整理</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📁</div>
+                <div class="feature-text"><h4>自动分类</h4><p>模板按剪映物理文件夹自动分类</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">👆</div>
+                <div class="feature-text"><h4>点击筛选</h4><p>点击侧边栏分类即可筛选</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text"><h4>右键操作</h4><p>右键分类可自建、删除、重命名</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/03-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: 排序与搜索 -->
+      <div class="slide" data-slide="4">
+        <h2 class="slide-title text-reveal">4. <span>排序与搜索</span></h2>
+        <p class="slide-subtitle text-reveal">Time/Name 切换 + 实时关键词搜索</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📊</div>
+                <div class="feature-text"><h4>排序切换</h4><p>按修改时间或名称排序</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-text"><h4>实时搜索</h4><p>输入关键词立即显示结果</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/04-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: 预览与安装 -->
+      <div class="slide" data-slide="5">
+        <h2 class="slide-title text-reveal">5. <span>预览与安装</span></h2>
+        <p class="slide-subtitle text-reveal">悬停显示操作面板 + 一键安装到剪映</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">🖱️</div>
+                <div class="feature-text"><h4>悬停预览</h4><p>鼠标悬停显示操作面板</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">⬇️</div>
+                <div class="feature-text"><h4>一键安装</h4><p>安装到剪映，草稿箱置顶</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/05-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: 收藏/整理 -->
+      <div class="slide" data-slide="6">
+        <h2 class="slide-title text-reveal">6. <span>收藏与整理</span></h2>
+        <p class="slide-subtitle text-reveal">收藏功能 + 整理模式</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">⭐</div>
+                <div class="feature-text"><h4>收藏功能</h4><p>星标收藏快速查找</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📦</div>
+                <div class="feature-text"><h4>整理模式</h4><p>批量移动/删除模板</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/06-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: 清理/草稿 -->
+      <div class="slide" data-slide="7">
+        <h2 class="slide-title text-reveal">7. <span>清理与草稿</span></h2>
+        <p class="slide-subtitle text-reveal">重复清理 + 本地草稿</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">🧹</div>
+                <div class="feature-text"><h4>重复清理</h4><p>一键批量清理重复</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📁</div>
+                <div class="feature-text"><h4>本地草稿</h4><p>管理剪映草稿项目</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/07-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: 导出与打包 -->
+      <div class="slide" data-slide="8">
+        <h2 class="slide-title text-reveal">8. <span>导出与打包</span></h2>
+        <p class="slide-subtitle text-reveal">导出草稿为模板 + 一键打包分享</p>
+        <div class="slide-content">
+          <div class="content-left">
+            <ul class="feature-list">
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📤</div>
+                <div class="feature-text"><h4>导出草稿为模板</h4><p>草稿视图右键/多选导出到模板库，支持指定目录</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">📦</div>
+                <div class="feature-text"><h4>一键打包模板包</h4><p>将模板/草稿打包成 .capkit 格式，便于分享</p></div>
+              </li>
+              <li class="feature-item text-reveal">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-text"><h4>密码加密</h4><p>支持设置密码保护模板包，私密分享</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-right">
+            <video class="video-placeholder text-reveal" src="assets/08-settings.mp4" controls preload="metadata" style="border-radius: 12px; border: none; padding: 0; background: #000;"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- 结束页 -->
+      <div class="slide end-slide" data-slide="9">
+        <div class="bg-glow bg-glow-1"></div>
+        <div class="bg-glow bg-glow-2"></div>
+        <div class="end-grid"></div>
+        <div class="end-particles"></div>
+        <div class="glow-line"></div>
+        <div class="glow-line"></div>
+        <div class="glow-line"></div>
+        <div class="glow-line"></div>
+        <div class="end-content">
+          <div class="end-logo-wrap">
+            <div class="end-logo">
+              <svg width="80" height="120" viewBox="0 0 16 24" fill="none" stroke="#FE2C55" stroke-width="3.5">
+                <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
+              </svg>
+              <span>apkit</span>
+            </div>
+          </div>
+          <p class="end-subtitle">剪映模板管理工具</p>
+          <a href="https://capkit.top" class="end-url">https://capkit.top</a>
+          <p class="end-thanks">感谢观看</p>
+        </div>
+      </div>
+
+      <!-- 导航 -->
+      <div class="navigation">
+        <div class="nav-dot active" data-goto="0"></div>
+        <div class="nav-dot" data-goto="1"></div>
+        <div class="nav-dot" data-goto="2"></div>
+        <div class="nav-dot" data-goto="3"></div>
+        <div class="nav-dot" data-goto="4"></div>
+        <div class="nav-dot" data-goto="5"></div>
+        <div class="nav-dot" data-goto="6"></div>
+        <div class="nav-dot" data-goto="7"></div>
+        <div class="nav-dot" data-goto="8"></div>
+        <div class="nav-dot" data-goto="9"></div>
+      </div>
+      <div class="progress-bar" style="width: 10%;"></div>
+    </div>
+  </div>
+
+  <!-- 底部版权信息 -->
+  <footer class="tutorial-footer">
+    <p>CapKit © 2026 | Developed By <a href="https://sokei.top" target="_blank">SOKEI</a></p>
+    <p class="footer-tagline">极致轻量 · 纯净高效 · 一个更懂创作者的单文件剪映伴侣</p>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 10;
+
+    const orb1 = document.getElementById('orb1');
+    const orb2 = document.getElementById('orb2');
+
+    // 生成粒子
+    (function createParticles() {
+      const container = document.querySelector('.end-particles');
+      if (!container) return;
+      const particleCount = 25;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (8 + Math.random() * 12) + 's';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.width = (2 + Math.random() * 3) + 'px';
+        particle.style.height = particle.style.width;
+        container.appendChild(particle);
+      }
+    })();
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      orb1.style.transform = `translate(${x * 25}px, ${y * 25}px)`;
+      orb2.style.transform = `translate(${-x * 18}px, ${-y * 18}px)`;
+    });
+
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.nav-dot');
+
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev');
+        if (i < index) slide.classList.add('prev');
+        else if (i === index) slide.classList.add('active');
+      });
+
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      document.querySelector('.progress-bar').style.width = ((index + 1) / totalSlides * 100) + '%';
+      currentSlide = index;
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    document.querySelectorAll('.nav-dot').forEach(dot => {
+      dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.goto)));
+    });
+
+    // 移除页面点击翻页功能
+  </script>
+</body>
+</html>

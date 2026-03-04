@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv capkit-tutorial-2026-03:*)",
+      "Bash(ren capkit-tutorial-2026-03:*)",
+      "Bash(node:*)",
+      "Bash(powershell:*)",
+      "Bash(iconv:*)"
+    ]
+  }
+}

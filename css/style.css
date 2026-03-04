@@ -743,6 +743,32 @@ body {
     filter: grayscale(0%);
 }
 
+/* 使用帮助卡片 - 强调色样式 */
+.bento-card.help-card {
+    background: linear-gradient(160deg, rgba(254, 44, 85, 0.15) 0%, rgba(254, 44, 85, 0.08) 100%);
+    border: 1px solid rgba(254, 44, 85, 0.3);
+    box-shadow: 0 10px 30px rgba(254, 44, 85, 0.15);
+    text-decoration: none;
+}
+.bento-card.help-card:hover {
+    border-color: rgba(254, 44, 85, 0.6);
+    box-shadow: 0 20px 40px rgba(254, 44, 85, 0.25), 0 0 30px rgba(254, 44, 85, 0.15);
+    transform: translateY(-5px);
+}
+.bento-card.help-card h3 {
+    background: linear-gradient(135deg, #fe2c55 0%, #ff4d7a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.bento-card.help-card .card-icon-lg {
+    opacity: 0.15;
+}
+.bento-card.help-card:hover .card-icon-lg {
+    opacity: 0.25;
+    filter: none;
+}
+
 .span-2 { grid-column: span 2; }
 .row-2 { grid-row: span 2; }
 
