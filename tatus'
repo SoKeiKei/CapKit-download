@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapKit 操作教程</title>
+  <link href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cap-primary: #fe2c55;
+      --cap-primary-light: #ff4d7a;
+      --cap-primary-dark: #d92447;
+      --cap-dark: #121212;
+      --cap-gray: #1e1e1e;
+      --cap-light: #ffffff;
+      --cap-bg-dark: #0a0a0f;
+      --cap-bg-card: rgba(30, 30, 30, 0.85);
+      --cap-bg-sidebar: rgba(22, 22, 31, 0.95);
+      --cap-text: #ffffff;
+      --cap-text-muted: #8a8a9a;
+      --cap-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: clamp(12px, 1.5vw, 18px); }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+      background: var(--cap-dark);
+      color: var(--cap-text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .presentation {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #0d0d12 0%, #1a1a24 50%, #0f0f18 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 1000;
+    }
+
+    .orb {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+      transition: transform 0.12s ease-out;
+    }
+
+    .orb-1 { background: var(--cap-primary); top: -150px; right: -150px; }
+    .orb-2 { background: #6366f1; bottom: -150px; left: -150px; }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: clamp(30px, 4vw, 50px) clamp(30px, 4vw, 50px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide-container {
+      width: calc(100% - 160px);
+      max-width: calc(100% - 160px);
+      height: calc(100vh - 180px);
+      max-height: calc(100vh - 220px);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), 0 0 1px rgba(254,44,85,0.5);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(2rem, 4vw, 4rem) clamp(2.5rem, 5vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active { opacity: 1; visibility: visible; z-index: 20; }
+    .slide.prev { transform: translateY(20px); opacity: 0; }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .content-left { flex: 0 0 35%; }
+    .content-right { flex: 1; }
+
+    .slide-title {
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.75) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-title span { color: var(--cap-primary); -webkit-text-fill-color: var(--cap-primary); }
+
+    .slide-subtitle {
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+      color: var(--cap-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .glass-card {
+      background: var(--cap-bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--cap-border);
+      border-radius: 16px;
+    }
+
+    .feature-list { list-style: none; }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--cap-border);
+    }
+    .feature-icon {
+      width: 2rem;
+      height: 2rem;
+      background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .feature-text h4 {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .feature-text p {
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      color: var(--cap-text-muted);
+      line-height: 1.5;
+    }
+
+    .steps-container { display: flex; flex-direction: column; gap: 1.2rem; }
+    .step { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .step-number {
+      width: 2.4rem;
+      height: 2.4rem;
+      background: var(--cap-primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      color: var(--cap-text-muted);
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(254,44,85,0.12), rgba(254,44,85,0.05));
+      border: 1px solid rgba(254,44,85,0.35);
+      border-radius: 12px;
+      padding: 1.3rem;
+      margin-top: 1.3rem;
+    }
+    .highlight-box h4 {
+      color: var(--cap-primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .highlight-box p {
+      color: var(--cap-text-muted);
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      line-height: 1.5;
+    }
+
+    /* 设置弹窗复刻 */
+    .settings-mock {
+      background: var(--cap-gray);
+      border: 1px solid var(--cap-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    }
+
+    .settings-header {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--cap-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .settings-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .settings-version {
+      font-size: 0.65rem;
+      color: var(--cap-primary);
+      background: rgba(254,44,85,0.15);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .settings-close {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      color: var(--cap-text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .settings-close:hover { background: rgba(255,255,255,0.1); color: var(--cap-text); }
+
+    .settings-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .settings-section {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--cap-border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .settings-section-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .settings-section-title .dot { width: 6px; height: 6px; background: #fbbf24; border-radius: 50%; }
+
+    .settings-input-row {
