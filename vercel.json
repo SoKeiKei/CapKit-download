@@ -1,4 +1,14 @@
 {
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/updates/latest.json",
+      "destination": "/api/update/latest"
+    },
+    {
+      "source": "/updates/download",
+      "destination": "/api/update/download"
+    }
+  ]
 }

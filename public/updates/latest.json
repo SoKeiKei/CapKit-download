@@ -1,0 +1,31 @@
+{
+  "version": "0.1.11",
+  "notes": "See the assets to download this version and install.",
+  "pub_date": "2026-03-08T10:24:01.600Z",
+  "platforms": {
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMW9hN09xRDhOa21rMzM4QTZlWlE4c2llaGRzZzRBZzNmQXBKR09zbDJ2emNWVFNTbFRQZVZ1MDY4VkQ2cTdRR1ZLaGg1WmZqUXNBbW1CTkNGZnJuU0EwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY0ODI5CWZpbGU6Y2Fwa2l0LmFwcC50YXIuZ3oKeDhXeGN2MkZkdVFhdGs1WW5FRDdWRjlsQk52ejNHMzE2UkptZjg1S2pvZW01VkJzSmd6QUF3VHhlQVN0RkZiOGJhR0NxTE92RHQvYTZxdUxkY3pqQ1E9PQo=",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_x64.app.tar.gz"
+    },
+    "darwin-x86_64-app": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMW9hN09xRDhOa21rMzM4QTZlWlE4c2llaGRzZzRBZzNmQXBKR09zbDJ2emNWVFNTbFRQZVZ1MDY4VkQ2cTdRR1ZLaGg1WmZqUXNBbW1CTkNGZnJuU0EwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY0ODI5CWZpbGU6Y2Fwa2l0LmFwcC50YXIuZ3oKeDhXeGN2MkZkdVFhdGs1WW5FRDdWRjlsQk52ejNHMzE2UkptZjg1S2pvZW01VkJzSmd6QUF3VHhlQVN0RkZiOGJhR0NxTE92RHQvYTZxdUxkY3pqQ1E9PQo=",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_x64.app.tar.gz"
+    },
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMXExTjNRU0JxVDAyWFZITmNhOXM0aWRtQU1JblZYVTFZMnhFUFJ3dUR6S1pPSzh6cmJMRXpXazhkcjVhdkdLMndHVTdKMzZtTXpZMzRwTWluay9pc1FFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY0ODgyCWZpbGU6Y2Fwa2l0LmFwcC50YXIuZ3oKWjNleHlpeTRVeldrVS82UmVqY2dkRzhHQWxLSXhRNi91Z3drbnV5R0hvZDFLYUFsUW5oMjFSRDgxY010VlBVNVNMWDJrOVhhbEsxdytZc2RNS21aRGc9PQo=",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_aarch64.app.tar.gz"
+    },
+    "darwin-aarch64-app": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMXExTjNRU0JxVDAyWFZITmNhOXM0aWRtQU1JblZYVTFZMnhFUFJ3dUR6S1pPSzh6cmJMRXpXazhkcjVhdkdLMndHVTdKMzZtTXpZMzRwTWluay9pc1FFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY0ODgyCWZpbGU6Y2Fwa2l0LmFwcC50YXIuZ3oKWjNleHlpeTRVeldrVS82UmVqY2dkRzhHQWxLSXhRNi91Z3drbnV5R0hvZDFLYUFsUW5oMjFSRDgxY010VlBVNVNMWDJrOVhhbEsxdytZc2RNS21aRGc9PQo=",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_aarch64.app.tar.gz"
+    },
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMXJuRFRvUVRMTTVZcWFNTVBSeWs5VURFZE45KzhNZ2RBamx2b0JEMGNKNkVadWUwQWR5ckR2TWtYUjNpRXExN3g2N0hNOWQ2U2pOQzFoaGgySjIwY0FFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY1NDM5CWZpbGU6Y2Fwa2l0XzAuMS4xMV94NjQtc2V0dXAuZXhlCk8yTUxCYXlzTVZ0SlZScE9lQS9Uc2hPNG95ZXZhaHlKaWtMNEkrY2p5TDhLN2Q0RmZPNXBtWk5BWGFObWFVbW8xMUdHdXZjaENiZUlQdENIY0Z6MEFBPT0K",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_0.1.11_x64-setup.exe"
+    },
+    "windows-x86_64-nsis": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUTkswNnEzUGJUMXJuRFRvUVRMTTVZcWFNTVBSeWs5VURFZE45KzhNZ2RBamx2b0JEMGNKNkVadWUwQWR5ckR2TWtYUjNpRXExN3g2N0hNOWQ2U2pOQzFoaGgySjIwY0FFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcyOTY1NDM5CWZpbGU6Y2Fwa2l0XzAuMS4xMV94NjQtc2V0dXAuZXhlCk8yTUxCYXlzTVZ0SlZScE9lQS9Uc2hPNG95ZXZhaHlKaWtMNEkrY2p5TDhLN2Q0RmZPNXBtWk5BWGFObWFVbW8xMUdHdXZjaENiZUlQdENIY0Z6MEFBPT0K",
+      "url": "https://github.com/SoKeiKei/CapKit-download/releases/download/v0.1.11/capkit_0.1.11_x64-setup.exe"
+    }
+  }
+}

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CapKit 操作教程</title>
+  <title>CapKit 鎿嶄綔鏁欑▼</title>
   <link href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -218,7 +218,7 @@
       line-height: 1.5;
     }
 
-    /* 设置弹窗复刻 */
+    /* 璁剧疆寮圭獥澶嶅埢 */
     .settings-mock {
       background: var(--cap-gray);
       border: 1px solid var(--cap-border);
@@ -314,7 +314,7 @@
     }
     .settings-btn:hover { background: var(--cap-primary); color: white; }
 
-    /* 模板网格复刻 */
+    /* 妯℃澘缃戞牸澶嶅埢 */
     .template-grid-mock {
       background: var(--cap-gray);
       border-radius: 12px;
@@ -432,7 +432,7 @@
     .card-action:hover { background: rgba(255,255,255,0.15); }
     .card-action span:first-child { font-size: 1rem; }
 
-    /* 占位遮罩 */
+    /* 鍗犱綅閬僵 */
     .video-placeholder {
       width: 100%;
       aspect-ratio: 16 / 10;
@@ -456,7 +456,7 @@
       transform: scale(1.02);
     }
 
-    /* 视频元素样式 - 移除蒙版和边框 */
+    /* 瑙嗛鍏冪礌鏍峰紡 - 绉婚櫎钂欑増鍜岃竟妗?*/
     .video-placeholder[controls] {
       background: transparent;
       border: none;
@@ -513,7 +513,7 @@
       font-family: 'SF Mono', monospace;
     }
 
-    /* 封面页 */
+    /* 灏侀潰椤?*/
     .cover-slide .slide-content {
       flex-direction: column;
       justify-content: center;
@@ -530,14 +530,14 @@
 
     .cover-meta { display: flex; gap: 2rem; font-size: clamp(0.7rem, 1vw, 0.9rem); color: var(--cap-text-muted); }
 
-    /* 结束页 */
+    /* 缁撴潫椤?*/
     .end-slide .slide-content { justify-content: center; align-items: center; }
 
     .end-title { font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 700; margin-bottom: 1.2rem; }
 
     .end-url { font-size: clamp(1.4rem, 2vw, 2rem); color: var(--cap-primary); margin-bottom: 2rem; font-weight: 600; }
 
-    /* 高级结束页样式 - 简洁大气版 */
+    /* 楂樼骇缁撴潫椤垫牱寮?- 绠€娲佸ぇ姘旂増 */
     .end-slide {
       background: linear-gradient(180deg, #0a0a0f 0%, #0f0f18 50%, #14141f 100%);
       position: absolute;
@@ -547,7 +547,7 @@
       height: 100%;
     }
 
-    /* 动态光效背景 */
+    /* 鍔ㄦ€佸厜鏁堣儗鏅?*/
     .end-slide .bg-glow {
       position: absolute;
       width: 600px;
@@ -575,7 +575,7 @@
       50% { transform: translate(30px, 20px) scale(1.1); }
     }
 
-    /* 底部大光晕 */
+    /* 搴曢儴澶у厜鏅?*/
     .end-slide::before {
       content: '';
       position: absolute;
@@ -588,7 +588,7 @@
       pointer-events: none;
     }
 
-    /* 网格背景 */
+    /* 缃戞牸鑳屾櫙 */
     .end-grid {
       position: absolute;
       inset: 0;
@@ -601,7 +601,7 @@
       -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
     }
 
-    /* 粒子系统 */
+    /* 绮掑瓙绯荤粺 */
     .end-particles {
       position: absolute;
       inset: 0;
@@ -627,7 +627,7 @@
       100% { transform: translateY(-100px) scale(1); opacity: 0; }
     }
 
-    /* 发光线条 */
+    /* 鍙戝厜绾挎潯 */
     .glow-line {
       position: absolute;
       width: 1px;
@@ -681,7 +681,7 @@
     .end-logo svg { width: 0.7em !important; height: auto; flex-shrink: 0; filter: drop-shadow(0 0 30px rgba(254,44,85,0.7)); }
     .end-logo span { font-weight: 700; letter-spacing: 0.08em; line-height: 1; }
 
-    /* 主标题 */
+    /* 涓绘爣棰?*/
     .end-title {
       font-size: clamp(3.5rem, 7vw, 5.5rem);
       font-weight: 900;
@@ -700,7 +700,7 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* 副标题 */
+    /* 鍓爣棰?*/
     .end-subtitle {
       font-size: clamp(0.9rem, 1.4vw, 1.2rem);
       color: rgba(255,255,255,0.4);
@@ -710,7 +710,7 @@
       animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
     }
 
-    /* 网址 */
+    /* 缃戝潃 */
     .end-url {
       font-size: clamp(1.4rem, 2.2vw, 1.8rem);
       font-weight: 600;
@@ -732,7 +732,7 @@
       transform: translateY(-2px);
     }
 
-    /* 感谢观看 */
+    /* 鎰熻阿瑙傜湅 */
     .end-thanks {
       font-size: clamp(1.2rem, 1.8vw, 1.6rem);
       color: rgba(255,255,255,0.6);
@@ -744,7 +744,7 @@
       animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
     }
 
-    /* 入场动画 */
+    /* 鍏ュ満鍔ㄧ敾 */
     @keyframes fade-up {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -768,7 +768,7 @@
     .end-thanks::before { right: 100%; }
     .end-thanks::after { left: 100%; }
 
-    /* 导航 */
+    /* 瀵艰埅 */
     .navigation { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 100; }
 
     .nav-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
@@ -777,7 +777,7 @@
 
     .progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--cap-primary); transition: width 0.3s; z-index: 100; }
 
-    /* 动画 */
+    /* 鍔ㄧ敾 */
     .text-reveal { opacity: 0; transform: translateY(20px); }
 
     .slide.active .text-reveal { animation: reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -788,7 +788,7 @@
 
     @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
-    /* 导航栏样式 - 与主页一致 */
+    /* 瀵艰埅鏍忔牱寮?- 涓庝富椤典竴鑷?*/
     .modern-nav {
       display: flex;
       align-items: center;
@@ -826,7 +826,7 @@
       transform: rotate(-12deg);
     }
 
-    /* 导航栏 Logo 链接样式 - 无下划线无色变 */
+    /* 瀵艰埅鏍?Logo 閾炬帴鏍峰紡 - 鏃犱笅鍒掔嚎鏃犺壊鍙?*/
     .nav-logo-link {
       text-decoration: none;
       color: #ffffff;
@@ -877,7 +877,7 @@
       border-color: rgba(246, 173, 85, 0.4);
     }
 
-    /* 底部版权样式 */
+    /* 搴曢儴鐗堟潈鏍峰紡 */
     .tutorial-footer {
       position: fixed;
       bottom: 0;
@@ -910,7 +910,7 @@
       letter-spacing: 0.1em;
     }
 
-    /* 左右点击区域 - 限制在 slide-container 内部 */
+    /* 宸﹀彸鐐瑰嚮鍖哄煙 - 闄愬埗鍦?slide-container 鍐呴儴 */
     .click-area {
       position: absolute;
       top: 0;
@@ -957,7 +957,7 @@
       stroke-width: 2.5;
     }
 
-    /* B 站链接样式 */
+    /* B 绔欓摼鎺ユ牱寮?*/
     .bilibili-link {
       display: inline-flex;
       align-items: center;
@@ -980,18 +980,18 @@
   </style>
 </head>
 <body>
-  <!-- 顶部导航栏 -->
+  <!-- 椤堕儴瀵艰埅鏍?-->
   <nav class="modern-nav">
     <a href="../index.html" class="nav-logo-link">
       <div class="brand-logo">
         <svg width="20" height="28" viewBox="4 0 12 24" fill="none" stroke="#fe2c55" stroke-width="3.5" style="margin-bottom: -1px; margin-right: -2px;">
           <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
         </svg>
-        <span>apkit</span>
+        <span>APKIT</span>
       </div>
     </a>
     <div class="nav-menu">
-      <a href="../index.html">主页</a>
+      <a href="../index.html">涓婚〉</a>
       <a href="../pro.html" class="nav-link-pro">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
@@ -1014,7 +1014,7 @@
     <div class="orb orb-2" id="orb2"></div>
 
     <div class="slide-container">
-      <!-- 左右点击区域 -->
+      <!-- 宸﹀彸鐐瑰嚮鍖哄煙 -->
       <div class="click-area click-area-left" onclick="prevSlide()">
         <div class="click-indicator">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1030,45 +1030,45 @@
         </div>
       </div>
 
-      <!-- Slide 1: 封面 -->
+      <!-- Slide 1: 灏侀潰 -->
       <div class="slide cover-slide active" data-slide="0">
         <div class="slide-content">
           <div class="logo text-reveal">
             <svg width="40" height="60" viewBox="0 0 16 24" fill="none" stroke="#FE2C55" stroke-width="3.5">
               <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
             </svg>
-            <span>apkit</span>
+            <span>APKIT</span>
           </div>
-          <h1 class="cover-title text-reveal"><span class="highlight">完整功能演示</span></h1>
+          <h1 class="cover-title text-reveal"><span class="highlight">瀹屾暣鍔熻兘婕旂ず</span></h1>
           <div class="cover-meta text-reveal">
-            <a href="https://www.bilibili.com/video/BV1d9PizdE3u/" target="_blank" class="bilibili-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FB7299" style="margin-bottom: -3px;"><path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333-1.333z" fill-rule="evenodd"></path></svg> B 站完整演示</a>
+            <a href="https://www.bilibili.com/video/BV1d9PizdE3u/" target="_blank" class="bilibili-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FB7299" style="margin-bottom: -3px;"><path clip-rule="evenodd" d="M4.977 3.561a1.31 1.31 0 111.818-1.884l2.828 2.728c.08.078.149.163.205.254h4.277a1.32 1.32 0 01.205-.254l2.828-2.728a1.31 1.31 0 011.818 1.884L17.82 4.66h.848A5.333 5.333 0 0124 9.992v7.34a5.333 5.333 0 01-5.333 5.334H5.333A5.333 5.333 0 010 17.333V9.992a5.333 5.333 0 015.333-5.333h.781L4.977 3.56zm.356 3.67a2.667 2.667 0 00-2.666 2.667v7.529a2.667 2.667 0 002.666 2.666h13.334a2.667 2.667 0 002.666-2.666v-7.53a2.667 2.667 0 00-2.666-2.666H5.333zm1.334 5.192a1.333 1.333 0 112.666 0v1.192a1.333 1.333 0 11-2.666 0v-1.192zM16 11.09c-.736 0-1.333.597-1.333 1.333v1.192a1.333 1.333 0 102.666 0v-1.192c0-.736-.597-1.333-1.333-1.333-1.333z" fill-rule="evenodd"></path></svg> B 绔欏畬鏁存紨绀?/a>
           </div>
         </div>
       </div>
 
-      <!-- Slide 2: 初始化设置 -->
+      <!-- Slide 2: 鍒濆鍖栬缃?-->
       <div class="slide" data-slide="1">
-        <h2 class="slide-title text-reveal">1. <span>初始化设置</span></h2>
-        <p class="slide-subtitle text-reveal">点击右上角设置按钮，配置目录路径</p>
+        <h2 class="slide-title text-reveal">1. <span>鍒濆鍖栬缃?/span></h2>
+        <p class="slide-subtitle text-reveal">鐐瑰嚮鍙充笂瑙掕缃寜閽紝閰嶇疆鐩綍璺緞</p>
         <div class="slide-content">
           <div class="content-left">
             <div style="padding: 1.5rem;">
               <div style="margin-bottom: 1.3rem;">
-                <h4 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: rgba(255,255,255,0.9);">配置步骤</h4>
-                <p style="font-size: 1rem; color: var(--cap-text-muted);">点击右上角设置按钮，打开配置中心</p>
+                <h4 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: rgba(255,255,255,0.9);">閰嶇疆姝ラ</h4>
+                <p style="font-size: 1rem; color: var(--cap-text-muted);">鐐瑰嚮鍙充笂瑙掕缃寜閽紝鎵撳紑閰嶇疆涓績</p>
               </div>
               <ul style="list-style: none;">
                 <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--cap-border);">
                   <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">1</div>
-                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">剪映草稿目录</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">选择剪映草稿存放位置</p></div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">鍓槧鑽夌鐩綍</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">閫夋嫨鍓槧鑽夌瀛樻斁浣嶇疆</p></div>
                 </li>
                 <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--cap-border);">
                   <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">2</div>
-                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">模板仓库</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">添加本地模板存放目录</p></div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">妯℃澘浠撳簱</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">娣诲姞鏈湴妯℃澘瀛樻斁鐩綍</p></div>
                 </li>
                 <li style="display: flex; align-items: flex-start; gap: 1rem; padding: 0.7rem 0;">
                   <div style="width: 2.4rem; height: 2.4rem; background: linear-gradient(135deg, var(--cap-primary), var(--cap-primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">3</div>
-                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">预览视频目录</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">配置视频预览文件位置</p></div>
+                  <div><h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: rgba(255,255,255,0.9);">棰勮瑙嗛鐩綍</h4><p style="font-size: 0.85rem; color: var(--cap-text-muted);">閰嶇疆瑙嗛棰勮鏂囦欢浣嶇疆</p></div>
                 </li>
               </ul>
             </div>
@@ -1079,20 +1079,20 @@
         </div>
       </div>
 
-      <!-- Slide 3: 刷新模板 -->
+      <!-- Slide 3: 鍒锋柊妯℃澘 -->
       <div class="slide" data-slide="2">
-        <h2 class="slide-title text-reveal">2. <span>刷新模板</span></h2>
-        <p class="slide-subtitle text-reveal">点击顶部「刷新模板」按钮扫描导入</p>
+        <h2 class="slide-title text-reveal">2. <span>鍒锋柊妯℃澘</span></h2>
+        <p class="slide-subtitle text-reveal">鐐瑰嚮椤堕儴銆屽埛鏂版ā鏉裤€嶆寜閽壂鎻忓鍏?/p>
         <div class="slide-content">
           <div class="content-left">
             <div class="steps-container">
               <div class="step text-reveal">
                 <div class="step-number">1</div>
-                <div class="step-content"><h4>点击刷新按钮</h4><p>配置好路径后，点击顶部的「刷新模板」按钮</p></div>
+                <div class="step-content"><h4>鐐瑰嚮鍒锋柊鎸夐挳</h4><p>閰嶇疆濂借矾寰勫悗锛岀偣鍑婚《閮ㄧ殑銆屽埛鏂版ā鏉裤€嶆寜閽?/p></div>
               </div>
               <div class="step text-reveal">
                 <div class="step-number">2</div>
-                <div class="step-content"><h4>自动扫描导入</h4><p>CapKit 自动读取剪映模板库，导入到列表</p></div>
+                <div class="step-content"><h4>鑷姩鎵弿瀵煎叆</h4><p>CapKit 鑷姩璇诲彇鍓槧妯℃澘搴擄紝瀵煎叆鍒板垪琛?/p></div>
               </div>
             </div>
           </div>
@@ -1102,24 +1102,24 @@
         </div>
       </div>
 
-      <!-- Slide 4: 智能分类 -->
+      <!-- Slide 4: 鏅鸿兘鍒嗙被 -->
       <div class="slide" data-slide="3">
-        <h2 class="slide-title text-reveal">3. <span>智能分类</span></h2>
-        <p class="slide-subtitle text-reveal">按物理文件夹自动分类整理</p>
+        <h2 class="slide-title text-reveal">3. <span>鏅鸿兘鍒嗙被</span></h2>
+        <p class="slide-subtitle text-reveal">鎸夌墿鐞嗘枃浠跺す鑷姩鍒嗙被鏁寸悊</p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📁</div>
-                <div class="feature-text"><h4>自动分类</h4><p>模板按剪映物理文件夹自动分类</p></div>
+                <div class="feature-icon">馃搧</div>
+                <div class="feature-text"><h4>鑷姩鍒嗙被</h4><p>妯℃澘鎸夊壀鏄犵墿鐞嗘枃浠跺す鑷姩鍒嗙被</p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">👆</div>
-                <div class="feature-text"><h4>点击筛选</h4><p>点击侧边栏分类即可筛选</p></div>
+                <div class="feature-icon">馃憜</div>
+                <div class="feature-text"><h4>鐐瑰嚮绛涢€?/h4><p>鐐瑰嚮渚ц竟鏍忓垎绫诲嵆鍙瓫閫?/p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-text"><h4>右键操作</h4><p>右键分类可自建、删除、重命名</p></div>
+                <div class="feature-icon">鈿?/div>
+                <div class="feature-text"><h4>鍙抽敭鎿嶄綔</h4><p>鍙抽敭鍒嗙被鍙嚜寤恒€佸垹闄ゃ€侀噸鍛藉悕</p></div>
               </li>
             </ul>
           </div>
@@ -1129,20 +1129,20 @@
         </div>
       </div>
 
-      <!-- Slide 5: 排序与搜索 -->
+      <!-- Slide 5: 鎺掑簭涓庢悳绱?-->
       <div class="slide" data-slide="4">
-        <h2 class="slide-title text-reveal">4. <span>排序与搜索</span></h2>
-        <p class="slide-subtitle text-reveal">Time/Name 切换 + 实时关键词搜索</p>
+        <h2 class="slide-title text-reveal">4. <span>鎺掑簭涓庢悳绱?/span></h2>
+        <p class="slide-subtitle text-reveal">Time/Name 鍒囨崲 + 瀹炴椂鍏抽敭璇嶆悳绱?/p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📊</div>
-                <div class="feature-text"><h4>排序切换</h4><p>按修改时间或名称排序</p></div>
+                <div class="feature-icon">馃搳</div>
+                <div class="feature-text"><h4>鎺掑簭鍒囨崲</h4><p>鎸変慨鏀规椂闂存垨鍚嶇О鎺掑簭</p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">🔍</div>
-                <div class="feature-text"><h4>实时搜索</h4><p>输入关键词立即显示结果</p></div>
+                <div class="feature-icon">馃攳</div>
+                <div class="feature-text"><h4>瀹炴椂鎼滅储</h4><p>杈撳叆鍏抽敭璇嶇珛鍗虫樉绀虹粨鏋?/p></div>
               </li>
             </ul>
           </div>
@@ -1152,20 +1152,20 @@
         </div>
       </div>
 
-      <!-- Slide 6: 预览与安装 -->
+      <!-- Slide 6: 棰勮涓庡畨瑁?-->
       <div class="slide" data-slide="5">
-        <h2 class="slide-title text-reveal">5. <span>预览与安装</span></h2>
-        <p class="slide-subtitle text-reveal">悬停显示操作面板 + 一键安装到剪映</p>
+        <h2 class="slide-title text-reveal">5. <span>棰勮涓庡畨瑁?/span></h2>
+        <p class="slide-subtitle text-reveal">鎮仠鏄剧ず鎿嶄綔闈㈡澘 + 涓€閿畨瑁呭埌鍓槧</p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">🖱️</div>
-                <div class="feature-text"><h4>悬停预览</h4><p>鼠标悬停显示操作面板</p></div>
+                <div class="feature-icon">馃柋锔?/div>
+                <div class="feature-text"><h4>鎮仠棰勮</h4><p>榧犳爣鎮仠鏄剧ず鎿嶄綔闈㈡澘</p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">⬇️</div>
-                <div class="feature-text"><h4>一键安装</h4><p>安装到剪映，草稿箱置顶</p></div>
+                <div class="feature-icon">猬囷笍</div>
+                <div class="feature-text"><h4>涓€閿畨瑁?/h4><p>瀹夎鍒板壀鏄狅紝鑽夌绠辩疆椤?/p></div>
               </li>
             </ul>
           </div>
@@ -1175,20 +1175,20 @@
         </div>
       </div>
 
-      <!-- Slide 6: 收藏/整理 -->
+      <!-- Slide 6: 鏀惰棌/鏁寸悊 -->
       <div class="slide" data-slide="6">
-        <h2 class="slide-title text-reveal">6. <span>收藏与整理</span></h2>
-        <p class="slide-subtitle text-reveal">收藏功能 + 整理模式</p>
+        <h2 class="slide-title text-reveal">6. <span>鏀惰棌涓庢暣鐞?/span></h2>
+        <p class="slide-subtitle text-reveal">鏀惰棌鍔熻兘 + 鏁寸悊妯″紡</p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">⭐</div>
-                <div class="feature-text"><h4>收藏功能</h4><p>星标收藏快速查找</p></div>
+                <div class="feature-icon">猸?/div>
+                <div class="feature-text"><h4>鏀惰棌鍔熻兘</h4><p>鏄熸爣鏀惰棌蹇€熸煡鎵?/p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📦</div>
-                <div class="feature-text"><h4>整理模式</h4><p>批量移动/删除模板</p></div>
+                <div class="feature-icon">馃摝</div>
+                <div class="feature-text"><h4>鏁寸悊妯″紡</h4><p>鎵归噺绉诲姩/鍒犻櫎妯℃澘</p></div>
               </li>
             </ul>
           </div>
@@ -1198,20 +1198,20 @@
         </div>
       </div>
 
-      <!-- Slide 7: 清理/草稿 -->
+      <!-- Slide 7: 娓呯悊/鑽夌 -->
       <div class="slide" data-slide="7">
-        <h2 class="slide-title text-reveal">7. <span>清理与草稿</span></h2>
-        <p class="slide-subtitle text-reveal">重复清理 + 本地草稿</p>
+        <h2 class="slide-title text-reveal">7. <span>娓呯悊涓庤崏绋?/span></h2>
+        <p class="slide-subtitle text-reveal">閲嶅娓呯悊 + 鏈湴鑽夌</p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">🧹</div>
-                <div class="feature-text"><h4>重复清理</h4><p>一键批量清理重复</p></div>
+                <div class="feature-icon">馃Ч</div>
+                <div class="feature-text"><h4>閲嶅娓呯悊</h4><p>涓€閿壒閲忔竻鐞嗛噸澶?/p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📁</div>
-                <div class="feature-text"><h4>本地草稿</h4><p>管理剪映草稿项目</p></div>
+                <div class="feature-icon">馃搧</div>
+                <div class="feature-text"><h4>鏈湴鑽夌</h4><p>绠＄悊鍓槧鑽夌椤圭洰</p></div>
               </li>
             </ul>
           </div>
@@ -1221,24 +1221,24 @@
         </div>
       </div>
 
-      <!-- Slide 8: 导出与打包 -->
+      <!-- Slide 8: 瀵煎嚭涓庢墦鍖?-->
       <div class="slide" data-slide="8">
-        <h2 class="slide-title text-reveal">8. <span>导出与打包</span></h2>
-        <p class="slide-subtitle text-reveal">导出草稿为模板 + 一键打包分享</p>
+        <h2 class="slide-title text-reveal">8. <span>瀵煎嚭涓庢墦鍖?/span></h2>
+        <p class="slide-subtitle text-reveal">瀵煎嚭鑽夌涓烘ā鏉?+ 涓€閿墦鍖呭垎浜?/p>
         <div class="slide-content">
           <div class="content-left">
             <ul class="feature-list">
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📤</div>
-                <div class="feature-text"><h4>导出草稿为模板</h4><p>草稿视图右键/多选导出到模板库，支持指定目录</p></div>
+                <div class="feature-icon">馃摛</div>
+                <div class="feature-text"><h4>瀵煎嚭鑽夌涓烘ā鏉?/h4><p>鑽夌瑙嗗浘鍙抽敭/澶氶€夊鍑哄埌妯℃澘搴擄紝鏀寔鎸囧畾鐩綍</p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">📦</div>
-                <div class="feature-text"><h4>一键打包模板包</h4><p>将模板/草稿打包成 .capkit 格式，便于分享</p></div>
+                <div class="feature-icon">馃摝</div>
+                <div class="feature-text"><h4>涓€閿墦鍖呮ā鏉垮寘</h4><p>灏嗘ā鏉?鑽夌鎵撳寘鎴?.capkit 鏍煎紡锛屼究浜庡垎浜?/p></div>
               </li>
               <li class="feature-item text-reveal">
-                <div class="feature-icon">🔐</div>
-                <div class="feature-text"><h4>密码加密</h4><p>支持设置密码保护模板包，私密分享</p></div>
+                <div class="feature-icon">馃攼</div>
+                <div class="feature-text"><h4>瀵嗙爜鍔犲瘑</h4><p>鏀寔璁剧疆瀵嗙爜淇濇姢妯℃澘鍖咃紝绉佸瘑鍒嗕韩</p></div>
               </li>
             </ul>
           </div>
@@ -1248,7 +1248,7 @@
         </div>
       </div>
 
-      <!-- 结束页 -->
+      <!-- 缁撴潫椤?-->
       <div class="slide end-slide" data-slide="9">
         <div class="bg-glow bg-glow-1"></div>
         <div class="bg-glow bg-glow-2"></div>
@@ -1264,16 +1264,16 @@
               <svg width="80" height="120" viewBox="0 0 16 24" fill="none" stroke="#FE2C55" stroke-width="3.5">
                 <path stroke-linecap="square" d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16" />
               </svg>
-              <span>apkit</span>
+              <span>APKIT</span>
             </div>
           </div>
-          <p class="end-subtitle">剪映模板管理工具</p>
+          <p class="end-subtitle">鍓槧妯℃澘绠＄悊宸ュ叿</p>
           <a href="https://capkit.top" class="end-url">https://capkit.top</a>
-          <p class="end-thanks">感谢观看</p>
+          <p class="end-thanks">鎰熻阿瑙傜湅</p>
         </div>
       </div>
 
-      <!-- 导航 -->
+      <!-- 瀵艰埅 -->
       <div class="navigation">
         <div class="nav-dot active" data-goto="0"></div>
         <div class="nav-dot" data-goto="1"></div>
@@ -1290,10 +1290,10 @@
     </div>
   </div>
 
-  <!-- 底部版权信息 -->
+  <!-- 搴曢儴鐗堟潈淇℃伅 -->
   <footer class="tutorial-footer">
-    <p>CapKit © 2026 | Developed By <a href="https://sokei.top" target="_blank">SOKEI</a></p>
-    <p class="footer-tagline">极致轻量 · 纯净高效 · 一个更懂创作者的单文件剪映伴侣</p>
+    <p>CapKit 漏 2026 | Developed By <a href="https://sokei.top" target="_blank">SOKEI</a></p>
+    <p class="footer-tagline">鏋佽嚧杞婚噺 路 绾噣楂樻晥 路 涓€涓洿鎳傚垱浣滆€呯殑鍗曟枃浠跺壀鏄犱即渚?/p>
   </footer>
 
   <script>
@@ -1303,7 +1303,7 @@
     const orb1 = document.getElementById('orb1');
     const orb2 = document.getElementById('orb2');
 
-    // 生成粒子
+    // 鐢熸垚绮掑瓙
     (function createParticles() {
       const container = document.querySelector('.end-particles');
       if (!container) return;
@@ -1355,7 +1355,8 @@
       dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.goto)));
     });
 
-    // 移除页面点击翻页功能
+    // 绉婚櫎椤甸潰鐐瑰嚮缈婚〉鍔熻兘
   </script>
 </body>
 </html>
+
