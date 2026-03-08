@@ -3,12 +3,12 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/updates/latest.json",
-      "destination": "/api/update/latest"
+      "source": "/api/update/latest",
+      "destination": "/api/update/latest.js"
     },
     {
-      "source": "/updates/download",
-      "destination": "/api/update/download"
+      "source": "/api/update/download",
+      "destination": "/api/update/download.js"
     }
   ]
 }
