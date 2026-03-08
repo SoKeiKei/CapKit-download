@@ -1,4 +1,6 @@
 {
+  "buildCommand": "echo 'Static build'",
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/api/update/latest", "destination": "/api/update/latest.js" },
     { "source": "/api/update/download", "destination": "/api/update/download.js" }
