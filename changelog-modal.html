@@ -1,6 +1,4 @@
-<!-- 更新日志弹窗内容 -->
 <style>
-    /* 更新日志弹窗样式 */
     .changelog-modal-content {
         background: var(--surface-color);
         border: 1px solid var(--border-subtle);
@@ -75,7 +73,7 @@
         box-shadow: 0 0 30px rgba(254, 44, 85, 0.1);
     }
 
-    .changelog-version .version-header {
+    .version-header {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -84,13 +82,13 @@
         border-bottom: 1px solid var(--border-subtle);
     }
 
-    .changelog-version .version-number {
+    .version-number {
         font-size: 1.1rem;
         font-weight: 700;
         font-family: 'Space Grotesk', sans-serif;
     }
 
-    .changelog-version .version-badge {
+    .version-badge {
         background: var(--brand-red);
         color: white;
         font-size: 0.65rem;
@@ -100,7 +98,7 @@
         text-transform: uppercase;
     }
 
-    .changelog-version .version-date {
+    .version-date {
         color: var(--text-secondary);
         font-size: 0.8rem;
         margin-left: auto;
@@ -152,7 +150,6 @@
         font-weight: 600;
     }
 
-    /* 滚动条样式 */
     .changelog-modal-body::-webkit-scrollbar {
         width: 6px;
     }
@@ -199,80 +196,64 @@
             </svg>
         </button>
     </div>
+
     <div class="changelog-modal-body">
-        <!-- v0.1.8 -->
         <div class="changelog-version latest">
             <div class="version-header">
-                <span class="version-number">V0.1.8</span>
+                <span class="version-number">V0.2.0</span>
                 <span class="version-badge">最新</span>
-                <span class="version-date">2026-02-28</span>
+                <span class="version-date">2026-03-08</span>
             </div>
+
             <div class="version-section">
-                <h4>🚀 性能大幅提升</h4>
+                <h4>🔄 程序内更新更省心</h4>
                 <ul>
-                    <li><strong>流式扫描引擎</strong>：重构模板扫描逻辑，支持实时流式加载，告别白屏等待</li>
-                    <li><strong>并行处理增强</strong>：优化多线程调度，海量文件响应速度提升 30%+</li>
+                    <li>在设置页可直接检查新版本，支持<strong>程序内下载并安装</strong>。</li>
+                    <li>更新完成后可一键重启应用，无需手动再去官网找安装包。</li>
                 </ul>
             </div>
+
             <div class="version-section">
-                <h4>🎬 预览视频匹配更精准</h4>
+                <h4>📦 模板包导入导出（0→1 新增）</h4>
                 <ul>
-                    <li>优化视频匹配算法，大幅降低误判率</li>
+                    <li>新增模板包导出：支持<strong>批量导出</strong>和<strong>单独导出</strong>。</li>
+                    <li>导出时可看到进度和预计大小，避免导出过程“没反应”的不确定感。</li>
+                    <li>导入后可直接进入模板管理流程，分享和迁移模板更方便。</li>
                 </ul>
             </div>
+
             <div class="version-section">
-                <h4>🧹 重复模板清理升级</h4>
+                <h4>⚡ 性能与体验优化</h4>
                 <ul>
-                    <li><strong>指纹算法升级</strong>：正确识别序号前缀不同的同一模板副本</li>
-                    <li><strong>同目录重复清理</strong>：同目录内的重复模板也能一键清除</li>
-                    <li><strong>删除后实时刷新</strong>：已删除项即时从列表消失</li>
-                    <li><strong>无模板目录检测</strong>：扫描不含有效模板的目录并支持删除</li>
-                    <li><strong>UI 优化升级</strong>：新增预估可释放空间提示</li>
-                </ul>
-            </div>
-            <div class="version-section">
-                <h4>🛡️ 安全与稳定性</h4>
-                <ul>
-                    <li>修复特定硬件环境下机器码锁定漏洞</li>
-                    <li>修复特殊 Unicode 字符导致的崩溃问题</li>
+                    <li>启动更快：应用可更早进入可操作状态，等待时间更短。</li>
+                    <li>模板排序切换更流畅：按名称/按修改时间切换不再触发重新扫描。</li>
+                    <li>扫描更准确：减少误识别与误匹配，模板和预览视频对应更稳定。</li>
                 </ul>
             </div>
         </div>
 
-        <!-- v0.1.7.1 -->
         <div class="changelog-version">
             <div class="version-header">
-                <span class="version-number">V0.1.7.1</span>
-                <span class="version-date">2026-02-24</span>
+                <span class="version-number">V0.1.11</span>
+                <span class="version-date">2026-03-08</span>
             </div>
             <div class="version-section">
-                <h4>🔐 安全与稳定性加固</h4>
+                <h4>🧩 发布链路完善</h4>
                 <ul>
-                    <li>加固机器码机制，避免授权失效</li>
-                    <li>优化校验性能，响应速度提升至微秒级</li>
+                    <li>完善 Windows/macOS 发布产物与签名，更新检测链路更稳定。</li>
                 </ul>
             </div>
         </div>
 
-        <!-- v0.1.7 -->
         <div class="changelog-version">
             <div class="version-header">
-                <span class="version-number">V0.1.7</span>
-                <span class="version-date">2026-02-23</span>
+                <span class="version-number">V0.1.9</span>
+                <span class="version-date">2026-03-03</span>
             </div>
             <div class="version-section">
-                <h4>✨ 重点新功能</h4>
+                <h4>🛠 启动稳定性修复</h4>
                 <ul>
-                    <li><strong>智能分类管理</strong>：支持手动创建分类，拖拽调整顺序</li>
-                    <li><strong>星标收藏系统</strong>：重要模板一键直达</li>
-                    <li><strong>批量管理模式</strong>：支持多选批量操作</li>
-                </ul>
-            </div>
-            <div class="version-section">
-                <h4>⚡ 体验优化</h4>
-                <ul>
-                    <li>重构底层扫描引擎，加载速度提升数倍</li>
-                    <li>支持最新 M3/M4 系列芯片 Mac</li>
+                    <li>修复部分场景下启动白屏与卡住问题，整体稳定性明显提升。</li>
                 </ul>
             </div>
         </div>
