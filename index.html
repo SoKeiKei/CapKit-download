@@ -97,7 +97,7 @@
                 </p>
                 <div class="action-row">
                     <div class="download-group">
-                        <a href="https://gh.llkk.cc/https://github.com/SoKeiKei/CapKit-download/releases/download/v0.2.0/capkit_0.2.0_x64-setup.exe" class="btn-fill" id="download-win" target="_blank">
+                        <a href="https://github.com/SoKeiKei/CapKit-download/releases/download/v0.2.0/capkit_0.2.0_x64-setup.exe" class="btn-fill" id="download-win" target="_blank">
                             <svg class="btn-icon-win" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.55L24 0v11.4H10.949V1.899zM0 12.6h9.75v9.451L0 20.699V12.6zm10.949 0H24V24l-13.051-1.899V12.6z"/>
                             </svg>
@@ -400,6 +400,10 @@
         }
 
         window.addEventListener('scroll', () => {
+            if (isMac) {
+                stickyDownload.classList.remove('visible');
+                return;
+            }
             const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
             if (window.scrollY > 400) {
                 stickyDownload.classList.add('visible');
